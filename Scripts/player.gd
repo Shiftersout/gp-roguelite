@@ -2,11 +2,14 @@ extends CharacterBody2D
 
 @export var move_speed : float = 128
 @onready var sprite = $AnimatedSprite2D
+@onready var weapon = $Weapon
+
 var h_direction = 1
 
 func _physics_process(_delta):
 	move()
 	flipSprite()
+	rotateWeapon()
 	move_and_slide()
 
 func move():
@@ -28,3 +31,6 @@ func flipSprite():
 		h_direction = -1
 		
 	sprite.scale.x = h_direction
+	
+func rotateWeapon():
+	weapon.look_at(get_global_mouse_position())

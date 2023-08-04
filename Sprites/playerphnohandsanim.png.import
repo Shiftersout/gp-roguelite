@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://iwdnilx0sweo"
-path="res://.godot/imported/playerphanim.png-873049fd2c0c41afc1a8ce170315d591.ctex"
+uid="uid://btoy20yylfyxx"
+path="res://.godot/imported/playerphnohandsanim.png-5050d82a35d43b0feb0cb24a71f33bc1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/playerphanim.png"
-dest_files=["res://.godot/imported/playerphanim.png-873049fd2c0c41afc1a8ce170315d591.ctex"]
+source_file="res://Sprites/playerphnohandsanim.png"
+dest_files=["res://.godot/imported/playerphnohandsanim.png-5050d82a35d43b0feb0cb24a71f33bc1.ctex"]
 
 [params]
 
