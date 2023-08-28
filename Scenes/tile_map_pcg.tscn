@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw67e8mrqn5vd"]
+
+[ext_resource type="Texture2D" uid="uid://wl1jcmpk2gno" path="res://Sprites/tsgp.png" id="1_hnthj"]
+[ext_resource type="Script" path="res://Scripts/pcgbsp.gd" id="2_r7qqh"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1gry7"]
+texture = ExtResource("1_hnthj")
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_mwnux"]
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_1gry7")
+
+[node name="TileMapPCG" type="TileMap"]
+tile_set = SubResource("TileSet_mwnux")
+format = 2
+layer_0/z_index = -1
+script = ExtResource("2_r7qqh")
