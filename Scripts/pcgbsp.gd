@@ -154,7 +154,10 @@ func create_rooms():
 		var r = rooms[i]
 		for x in range(r.x, r.x+r.w):
 			for y in range(r.y, r.y + r.h):
-				set_cell(0, Vector2(x, y), 1, GROUND)
+				if x == r.x or y == r.y or x == r.x + r.w-1 or y == r.y + r.h-1:
+					set_cell(0, Vector2i(x, y), 1, WALL)
+				else:
+					set_cell(0, Vector2i(x, y), 1, GROUND)
 
 ## Joins rooms with corridors, by connecting every leaf pair.
 func join_rooms():

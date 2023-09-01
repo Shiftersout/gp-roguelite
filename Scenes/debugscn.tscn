@@ -5,8 +5,11 @@
 [node name="debugscn" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(1155, 649)
+position = Vector2(2734, 1492)
 zoom = Vector2(0.2, 0.2)
 
 [node name="TileMapPCG" parent="." instance=ExtResource("1_s4b33")]
-min_room_size = 12
+map_w = 110
+map_h = 110
+min_room_size = 16
+min_room_factor = 0.5

@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var move_speed : float = 128
 @onready var sprite = $AnimatedSprite2D
 @onready var weapon = $Weapon
+@onready var raycast = $RayCast2D
 
 var h_direction = 1
 
@@ -38,3 +39,4 @@ func flipSprite():
 ## Rotates the weapon
 func rotateWeapon():
 	weapon.look_at(get_global_mouse_position())
+	raycast.look_at(get_global_mouse_position())
