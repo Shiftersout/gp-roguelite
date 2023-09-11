@@ -38,6 +38,7 @@ func generate():
 	create_rooms()
 	join_rooms()
 	clear_deadends()
+	add_walls()
 	
 ## Fills the entire map with roof tiles.
 func fill_roof():
@@ -199,16 +200,31 @@ func clear_deadends():
 		for cell in get_used_cells(0):
 			if get_cell_atlas_coords(0, cell) != GROUND: continue
 			
-			if check_direct_neighbours(cell.x, cell.y) == 3:
+			if check_direct_neighbours(cell.x, cell.y, ROOF) == 3:
 				set_cell(0, cell, 1, ROOF)
 				is_done = false
-				
+
+## Adds walls to the paths
+func add_walls():
+	for cell in get_used_cells(0):
+		if get_cell_atlas_coords(0, cell) != GROUND: continue
+		
+		var up = Vector2i(cell.x, cell.y-1)
+		var down = Vector2i(cell.x, cell.y+1)
+		var left = Vector2i(cell.x-1, cell.y)
+		var right = Vector2i(cell.x+1, cell.y)
+		
+		if get_cell_atlas_coords(0, up) == ROOF: set_cell(0, up, 1, WALL)
+		if get_cell_atlas_coords(0, down) == ROOF: set_cell(0, down, 1, WALL)
+		if get_cell_atlas_coords(0, left) == ROOF: set_cell(0, left, 1, WALL)
+		if get_cell_atlas_coords(0, right) == ROOF: set_cell(0, right, 1, WALL)
+	
 ## Returns how many neighbours are roof tiles. No diagonals.
-func check_direct_neighbours(x, y):
+func check_direct_neighbours(x, y, cell_type):
 	var count = 0
 	
-	if get_cell_atlas_coords(0, Vector2i(x, y-1)) == ROOF: count+=1
-	if get_cell_atlas_coords(0, Vector2i(x, y+1)) == ROOF: count+=1
-	if get_cell_atlas_coords(0, Vector2i(x-1, y)) == ROOF: count+=1
-	if get_cell_atlas_coords(0, Vector2i(x+1, y)) == ROOF: count+=1
+	if get_cell_atlas_coords(0, Vector2i(x, y-1)) == cell_type: count+=1
+	if get_cell_atlas_coords(0, Vector2i(x, y+1)) == cell_type: count+=1
+	if get_cell_atlas_coords(0, Vector2i(x-1, y)) == cell_type: count+=1
+	if get_cell_atlas_coords(0, Vector2i(x+1, y)) == cell_type: count+=1
 	return count

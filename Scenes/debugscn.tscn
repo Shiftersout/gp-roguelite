@@ -12,4 +12,5 @@ zoom = Vector2(0.2, 0.2)
 map_w = 110
 map_h = 110
 min_room_size = 16
+room_amount = 10
 min_room_factor = 0.5
