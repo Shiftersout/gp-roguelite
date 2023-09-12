@@ -1,13 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://bw67e8mrqn5vd"]
+[gd_scene load_steps=6 format=3 uid="uid://bw67e8mrqn5vd"]
 
 [ext_resource type="Texture2D" uid="uid://wl1jcmpk2gno" path="res://Sprites/tsgp.png" id="1_hnthj"]
 [ext_resource type="Script" path="res://Scripts/pcgbsp.gd" id="2_r7qqh"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ua6he"]
+vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1gry7"]
 texture = ExtResource("1_hnthj")
 1:0/0 = 0
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_ua6he")
 1:1/0 = 0
 1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:1/0/physics_layer_0/angular_velocity = 0.0
@@ -18,6 +24,7 @@ texture = ExtResource("1_hnthj")
 
 [sub_resource type="TileSet" id="TileSet_mwnux"]
 physics_layer_0/collision_layer = 1
+navigation_layer_0/layers = 1
 sources/1 = SubResource("TileSetAtlasSource_1gry7")
 
 [node name="TileMapPCG" type="TileMap"]

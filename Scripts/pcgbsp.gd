@@ -161,6 +161,8 @@ func create_rooms():
 					set_cell(0, Vector2i(x, y), 1, GROUND)
 
 ## Joins rooms with corridors, by connecting every leaf pair.
+## Maybe use Prim's algorithm to do it.
+## https://kidscancode.org/blog/2018/12/godot3_procgen7/#:~:text=There%20are%20many%20different%20ways%20to%20approach%20this%2C,be%20using%20Prim%E2%80%99s%20Algorithm%20to%20generate%20our%20MST.
 func join_rooms():
 	for sister in leaves:
 		var a = sister[0]
