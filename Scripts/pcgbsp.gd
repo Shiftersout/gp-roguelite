@@ -23,6 +23,8 @@ var leaves = [] ## An array that has every id of every pair of leaves.
 var leaf_id = 0 ## Current leaf id.
 var rooms = [] ## An array containing all rooms in the map.
 
+var path
+
 ## NOTE: change.
 func _ready():
 	## Working with seeds is not necessary for now.
@@ -36,9 +38,15 @@ func generate():
 	start_tree()
 	create_leaf(0)
 	create_rooms()
-	join_rooms()
+	##join_rooms()
 	clear_deadends()
+	var rooms_c = []
+	for i in rooms:
+		rooms_c.append(i.center)
+	path = find_mst(rooms_c)
 	add_walls()
+	
+	
 	
 ## Fills the entire map with roof tiles.
 func fill_roof():
@@ -155,10 +163,7 @@ func create_rooms():
 		var r = rooms[i]
 		for x in range(r.x, r.x+r.w):
 			for y in range(r.y, r.y + r.h):
-				if x == r.x or y == r.y or x == r.x + r.w-1 or y == r.y + r.h-1:
-					set_cell(0, Vector2i(x, y), 1, WALL)
-				else:
-					set_cell(0, Vector2i(x, y), 1, GROUND)
+				set_cell(0, Vector2i(x, y), 1, GROUND)
 
 ## Joins rooms with corridors, by connecting every leaf pair.
 ## Maybe use Prim's algorithm to do it.
@@ -192,6 +197,40 @@ func connect_leaves(leaf1, leaf2):
 			if(get_cell_atlas_coords(0, Vector2i(i, j)) == ROOF):
 				set_cell(0, Vector2i(i,j), 1, GROUND)
 
+##
+func find_mst(room_positions):
+	var path = AStar2D.new()
+	path.add_point(path.get_available_point_id(), room_positions.pop_front())
+	
+	while room_positions:
+		var min_dist = INF
+		var min_pos = null
+		var pos = null
+		
+		for p1 in path.get_point_ids():
+			var pos1 = path.get_point_position(p1)
+			
+			for pos2 in room_positions:
+				if pos1.distance_to(pos2) < min_dist:
+					min_dist = pos1.distance_to(pos2)
+					min_pos = pos2
+					pos = pos1
+					
+		var n = path.get_available_point_id()
+		path.add_point(n, min_pos)
+		path.connect_points(path.get_closest_point(pos), n)
+		room_positions.erase(min_pos)
+	
+	return path
+	
+func _draw():
+	if path:
+		for p in path.get_point_ids():
+			for c in path.get_point_connections(p):
+				var pp = path.get_point_position(p)
+				var cp = path.get_point_position(c)
+				draw_line(Vector2i(pp.x*16, pp.y*16), Vector2i(cp.x*16, cp.y*16), Color(1, 1, 0, 1), 15, true)
+				
 ## Clears corridors that have deadends.
 func clear_deadends():
 	var is_done = false
@@ -206,7 +245,7 @@ func clear_deadends():
 				set_cell(0, cell, 1, ROOF)
 				is_done = false
 
-## Adds walls to the paths
+## Adds walls to paths and rooms
 func add_walls():
 	for cell in get_used_cells(0):
 		if get_cell_atlas_coords(0, cell) != GROUND: continue
@@ -216,10 +255,19 @@ func add_walls():
 		var left = Vector2i(cell.x-1, cell.y)
 		var right = Vector2i(cell.x+1, cell.y)
 		
+		var up_left = Vector2i(cell.x-1, cell.y-1)
+		var up_right = Vector2i(cell.x+1, cell.y-1)
+		var down_left = Vector2i(cell.x-1, cell.y+1)
+		var down_right = Vector2i(cell.x+1, cell.y+1)
+		
 		if get_cell_atlas_coords(0, up) == ROOF: set_cell(0, up, 1, WALL)
 		if get_cell_atlas_coords(0, down) == ROOF: set_cell(0, down, 1, WALL)
 		if get_cell_atlas_coords(0, left) == ROOF: set_cell(0, left, 1, WALL)
 		if get_cell_atlas_coords(0, right) == ROOF: set_cell(0, right, 1, WALL)
+		if get_cell_atlas_coords(0, up_left) == ROOF: set_cell(0, up_left, 1, WALL)
+		if get_cell_atlas_coords(0, up_right) == ROOF: set_cell(0, up_right, 1, WALL)
+		if get_cell_atlas_coords(0, down_left) == ROOF: set_cell(0, down_left, 1, WALL)
+		if get_cell_atlas_coords(0, down_right) == ROOF: set_cell(0, down_right, 1, WALL)
 	
 ## Returns how many neighbours are roof tiles. No diagonals.
 func check_direct_neighbours(x, y, cell_type):
