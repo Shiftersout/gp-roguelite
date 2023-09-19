@@ -38,15 +38,12 @@ func generate():
 	start_tree()
 	create_leaf(0)
 	create_rooms()
-	##join_rooms()
-	clear_deadends()
 	var rooms_c = []
 	for i in rooms:
 		rooms_c.append(i.center)
 	path = find_mst(rooms_c)
+	join_rooms()
 	add_walls()
-	
-	
 	
 ## Fills the entire map with roof tiles.
 func fill_roof():
@@ -152,9 +149,10 @@ func create_rooms():
 		room.y = leaf.y + floor((leaf.h - room.h) / 2.0) + 1
 		room.split = leaf.split
 		
-		room.center = Vector2()
+		room.center = Vector2i()
 		room.center.x = floor(room.x + room.w/2.0)
 		room.center.y = floor(room.y + room.h/2.0)
+		room.connected_rooms = []
 		rooms.append(room)
 		room_id += 1
 		
@@ -166,27 +164,31 @@ func create_rooms():
 				set_cell(0, Vector2i(x, y), 1, GROUND)
 
 ## Joins rooms with corridors, by connecting every leaf pair.
-## Maybe use Prim's algorithm to do it.
-## https://kidscancode.org/blog/2018/12/godot3_procgen7/#:~:text=There%20are%20many%20different%20ways%20to%20approach%20this%2C,be%20using%20Prim%E2%80%99s%20Algorithm%20to%20generate%20our%20MST.
 func join_rooms():
-	for sister in leaves:
-		var a = sister[0]
-		var b = sister[1]
-		connect_leaves(tree[a], tree[b])
-		
-## Connects two leaves with corridors.
-func connect_leaves(leaf1, leaf2):
-	var x = min(leaf1.center.x, leaf2.center.x)
-	var y = min(leaf1.center.y, leaf2.center.y)
-	var w = 1
-	var h = 1
+	if path:
+		for p in path.get_point_ids():
+			for c in path.get_point_connections(p):
+				var pp = path.get_point_position(p)
+				var cp = path.get_point_position(c)
+				
+				var center1 = Vector2i(pp.x, pp.y)
+				var center2 = Vector2i(cp.x, cp.y)
+				connect_rooms(center1, center2)
+
+func connect_rooms(center1, center2):
+	var x = min(center1.x, center2.x)
+	var y = min(center1.y, center2.y)
+	var w = 2
+	var h = 2
 	
-	if(leaf1.split == 0):
+	if(center1.x == center2.x):
 		x -= floor(w/2.0)+1
-		h = abs(leaf1.center.y - leaf2.center.y)
-	else:
+		h = abs(center1.y - center2.y)
+	elif(center1.y == center2.y):
 		y -= floor(h/2.0)+1
-		w = abs(leaf1.center.x - leaf2.center.x)
+		w = abs(center1.x - center2.x)
+	else:
+		return null
 		
 	x = 0 if (x < 0) else x
 	y = 0 if (y < 0) else y
@@ -194,9 +196,15 @@ func connect_leaves(leaf1, leaf2):
 	## Sets cells to ground.
 	for i in range(x, x+w):
 		for j in range(y, y+h):
-			if(get_cell_atlas_coords(0, Vector2i(i, j)) == ROOF):
+			if get_cell_atlas_coords(0, Vector2i(i, j)) == ROOF:
 				set_cell(0, Vector2i(i,j), 1, GROUND)
-
+				
+	for room1 in range(rooms.size()):
+		if rooms[room1].center == center1:
+			for room2 in range(rooms.size()):
+				if rooms[room2].center == center2:
+					rooms[room1].connected_rooms.append(room2)
+					rooms[room2].connected_rooms.append(room1)
 ##
 func find_mst(room_positions):
 	var path = AStar2D.new()
@@ -222,28 +230,6 @@ func find_mst(room_positions):
 		room_positions.erase(min_pos)
 	
 	return path
-	
-func _draw():
-	if path:
-		for p in path.get_point_ids():
-			for c in path.get_point_connections(p):
-				var pp = path.get_point_position(p)
-				var cp = path.get_point_position(c)
-				draw_line(Vector2i(pp.x*16, pp.y*16), Vector2i(cp.x*16, cp.y*16), Color(1, 1, 0, 1), 15, true)
-				
-## Clears corridors that have deadends.
-func clear_deadends():
-	var is_done = false
-	
-	while !is_done:
-		is_done = true
-		
-		for cell in get_used_cells(0):
-			if get_cell_atlas_coords(0, cell) != GROUND: continue
-			
-			if check_direct_neighbours(cell.x, cell.y, ROOF) == 3:
-				set_cell(0, cell, 1, ROOF)
-				is_done = false
 
 ## Adds walls to paths and rooms
 func add_walls():
