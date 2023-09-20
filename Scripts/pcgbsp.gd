@@ -168,6 +168,7 @@ func join_rooms():
 	if path:
 		for p in path.get_point_ids():
 			for c in path.get_point_connections(p):
+				##for each connection in every point in the AStar:
 				var pp = path.get_point_position(p)
 				var cp = path.get_point_position(c)
 				
@@ -175,12 +176,25 @@ func join_rooms():
 				var center2 = Vector2i(cp.x, cp.y)
 				connect_rooms(center1, center2)
 
+## Creates paths between two rooms
 func connect_rooms(center1, center2):
+	
+	## Man, i'm sorry, but i don't know other way to do this.
+	## Checks if we've alredy joined the rooms.
+	for room1 in range(rooms.size()):
+		if rooms[room1].center == center1:
+			for room2 in range(rooms.size()):
+				if rooms[room2].center == center2:
+					for connection in rooms[room1].connected_rooms:
+						if connection == room2:
+							return null
+	
 	var x = min(center1.x, center2.x)
 	var y = min(center1.y, center2.y)
 	var w = 2
 	var h = 2
 	
+	##Checks if the connection is horizontal, vertical, or diagonal
 	if(center1.x == center2.x):
 		x -= floor(w/2.0)+1
 		h = abs(center1.y - center2.y)
@@ -188,26 +202,56 @@ func connect_rooms(center1, center2):
 		y -= floor(h/2.0)+1
 		w = abs(center1.x - center2.x)
 	else:
+		x -= floor(w/2.0)+1
+		h = abs(center1.y - center2.y)
+		x = 0 if (x < 0) else x
+		
+		var new_y = y
+		for i in range(x, x+w):
+			for j in range(y, y+h):
+				if get_cell_atlas_coords(0, Vector2i(i, j)) == ROOF:
+					set_cell(0, Vector2i(i,j), 1, GROUND)
+				new_y = j
+		h = 2
+		if get_cell_atlas_coords(0, Vector2i(x+w, new_y+1)) == GROUND:
+			new_y = y
+		else:
+			##+1 because of the path size :)))
+			new_y -=1
+		x = min(center1.x, center2.x)
+		w = abs(center1.x - center2.x)
+		for i in range(x, x+w):
+			for j in range(new_y, new_y+h):
+				if get_cell_atlas_coords(0, Vector2i(i, j)) == ROOF:
+					set_cell(0, Vector2i(i,j), 1, GROUND)
+
+		add_connection(center1, center2)
 		return null
 		
 	x = 0 if (x < 0) else x
 	y = 0 if (y < 0) else y
 	
-	## Sets cells to ground.
+	## Sets cells to ground. Does this if the path is vertical or horizontal.
 	for i in range(x, x+w):
 		for j in range(y, y+h):
 			if get_cell_atlas_coords(0, Vector2i(i, j)) == ROOF:
 				set_cell(0, Vector2i(i,j), 1, GROUND)
 				
+	add_connection(center1, center2)
+
+## Adds the connection bewteen each room so every room knows to wich other
+## room it's connected to
+func add_connection(point1, point2):
 	for room1 in range(rooms.size()):
-		if rooms[room1].center == center1:
+		if rooms[room1].center == point1:
 			for room2 in range(rooms.size()):
-				if rooms[room2].center == center2:
+				if rooms[room2].center == point2:
 					rooms[room1].connected_rooms.append(room2)
 					rooms[room2].connected_rooms.append(room1)
-##
+
+## Minnimum spanning tree algorythm, to figure out the shortest connection between rooms.
 func find_mst(room_positions):
-	var path = AStar2D.new()
+	path = AStar2D.new()
 	path.add_point(path.get_available_point_id(), room_positions.pop_front())
 	
 	while room_positions:
