@@ -5,6 +5,8 @@ extends CharacterBody2D
 @onready var sprite = $AnimatedSprite2D
 @onready var weapon = $Weapon
 @onready var raycast = $RayCast2D
+@onready var weapon_animation = $Weapon/WeaponAnimationPlayer
+@onready var particles = $Weapon/WeaponNode/GPUParticles2D
 
 var h_direction = 1
 
@@ -13,6 +15,7 @@ func _physics_process(_delta):
 	flipSprite()
 	rotateWeapon()
 	move_and_slide()
+	attack()
 
 ## Handles basic character movement
 func move():
@@ -40,3 +43,20 @@ func flipSprite():
 func rotateWeapon():
 	weapon.look_at(get_global_mouse_position())
 	raycast.look_at(get_global_mouse_position())
+
+func attack():
+	if Input.is_action_just_pressed("attack"):
+		weapon_animation.play("charge")
+	elif Input.is_action_just_released("attack"):
+		if weapon_animation.is_playing() and weapon_animation.current_animation == "charge":
+			weapon_animation.play("cancel_attack")
+		elif particles.emitting:
+			weapon_animation.play("attack")
+	
+	if weapon_animation.current_animation == "attack" and !weapon_animation.is_playing():
+		weapon_animation.play("cancel_attack")
+
+
+func _on_weapon_animation_player_animation_finished(anim_name):
+	if anim_name == "attack":
+		weapon_animation.play("cancel_attack")
