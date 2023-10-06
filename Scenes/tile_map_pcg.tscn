@@ -443,7 +443,7 @@ terrain_set_0/terrain_0/name = "Room"
 terrain_set_0/terrain_0/color = Color(0.501961, 0.345098, 1, 1)
 navigation_layer_0/layers = 1
 sources/1 = SubResource("TileSetAtlasSource_1gry7")
-sources/3 = SubResource("TileSetAtlasSource_0amej")
+sources/2 = SubResource("TileSetAtlasSource_0amej")
 
 [node name="TileMapPCG" type="TileMap"]
 tile_set = SubResource("TileSet_mwnux")

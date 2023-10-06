@@ -14,9 +14,9 @@ extends TileMap
 @export var min_room_factor : float = 0.4
 
 ## Tiles. NOTE: Change when working with real tileset
-const GROUND = Vector2i(1, 0)
-const ROOF = Vector2i(0, 1)
+const GROUND = Vector2i(0, 1)
 const WALL = Vector2i(1, 1)
+const ROOF = Vector2i(1, 0)
 
 var tree = {} ## A dictionary with the entire tree.
 var leaves = [] ## An array that has every id of every pair of leaves.
@@ -43,13 +43,12 @@ func generate():
 		rooms_c.append(i.center)
 	path = find_mst(rooms_c)
 	join_rooms()
-	add_walls()
 	
 ## Fills the entire map with roof tiles.
 func fill_roof():
 	for x in range(0, map_w):
 		for y in range(0, map_h):
-			set_cell(0, Vector2(x, y), 1, ROOF)
+			set_cell(0, Vector2(x, y), 2, Vector2i(1, 0))
 	
 ## Starts/restarts the tree dictionary.
 func start_tree():
@@ -156,12 +155,15 @@ func create_rooms():
 		rooms.append(room)
 		room_id += 1
 		
-	## Sets the cells in every room to ground. NOTE: change.
+	## Creates the rooms using the tilemap terrain function
+	var cells_array = []
 	for i in range(rooms.size()):
 		var r = rooms[i]
 		for x in range(r.x, r.x+r.w):
 			for y in range(r.y, r.y + r.h):
-				set_cell(0, Vector2i(x, y), 1, GROUND)
+				cells_array.append(Vector2i(x, y))
+				
+	set_cells_terrain_connect(0, cells_array, 0, 0, true)
 
 ## Joins rooms with corridors, by connecting every leaf pair.
 func join_rooms():
@@ -191,52 +193,50 @@ func connect_rooms(center1, center2):
 	
 	var x = min(center1.x, center2.x)
 	var y = min(center1.y, center2.y)
-	var w = 2
-	var h = 2
+	var w = 4
+	var h = 4
+	
+	var cells_array = []
 	
 	##Checks if the connection is horizontal, vertical, or diagonal
 	if(center1.x == center2.x):
 		x -= floor(w/2.0)+1
 		h = abs(center1.y - center2.y)
+		
 	elif(center1.y == center2.y):
 		y -= floor(h/2.0)+1
 		w = abs(center1.x - center2.x)
+	
+	
+	##NEEDS TO BE FINISHED
 	else:
-		x -= floor(w/2.0)+1
-		h = abs(center1.y - center2.y)
-		x = 0 if (x < 0) else x
+		var xmin = min(center1.x, center2.x)
+		var xmax = max(center1.x, center2.x)
+		var ymin = min(center1.y, center2.y)
+		var ymax = max(center1.y, center2.y)
 		
-		var new_y = y
-		for i in range(x, x+w):
-			for j in range(y, y+h):
-				if get_cell_atlas_coords(0, Vector2i(i, j)) == ROOF:
-					set_cell(0, Vector2i(i,j), 1, GROUND)
-				new_y = j
-		h = 2
-		if get_cell_atlas_coords(0, Vector2i(x+w, new_y+1)) == GROUND:
-			new_y = y
-		else:
-			##+1 because of the path size :)))
-			new_y -=1
-		x = min(center1.x, center2.x)
-		w = abs(center1.x - center2.x)
-		for i in range(x, x+w):
-			for j in range(new_y, new_y+h):
-				if get_cell_atlas_coords(0, Vector2i(i, j)) == ROOF:
-					set_cell(0, Vector2i(i,j), 1, GROUND)
-
+		for i in range(xmin, xmax):
+			for j in range(ymin, ymin+h):
+				cells_array.append(Vector2i(i, j))
+			
+		for i in range(xmin, xmin+h):
+			for j in range(ymin, ymax):
+				cells_array.append(Vector2i(i, j))
+				
+		set_cells_terrain_connect(0, cells_array, 0, 0, true)
 		add_connection(center1, center2)
-		return null
+		return
 		
 	x = 0 if (x < 0) else x
 	y = 0 if (y < 0) else y
 	
-	## Sets cells to ground. Does this if the path is vertical or horizontal.
 	for i in range(x, x+w):
 		for j in range(y, y+h):
 			if get_cell_atlas_coords(0, Vector2i(i, j)) == ROOF:
-				set_cell(0, Vector2i(i,j), 1, GROUND)
+				#set_cell(0, Vector2i(i,j), 1, GROUND)
+				cells_array.append(Vector2i(i, j))
 				
+	set_cells_terrain_connect(0, cells_array, 0, 0, true)
 	add_connection(center1, center2)
 
 ## Adds the connection bewteen each room so every room knows to wich other
@@ -274,37 +274,3 @@ func find_mst(room_positions):
 		room_positions.erase(min_pos)
 	
 	return path
-
-## Adds walls to paths and rooms
-func add_walls():
-	for cell in get_used_cells(0):
-		if get_cell_atlas_coords(0, cell) != GROUND: continue
-		
-		var up = Vector2i(cell.x, cell.y-1)
-		var down = Vector2i(cell.x, cell.y+1)
-		var left = Vector2i(cell.x-1, cell.y)
-		var right = Vector2i(cell.x+1, cell.y)
-		
-		var up_left = Vector2i(cell.x-1, cell.y-1)
-		var up_right = Vector2i(cell.x+1, cell.y-1)
-		var down_left = Vector2i(cell.x-1, cell.y+1)
-		var down_right = Vector2i(cell.x+1, cell.y+1)
-		
-		if get_cell_atlas_coords(0, up) == ROOF: set_cell(0, up, 1, WALL)
-		if get_cell_atlas_coords(0, down) == ROOF: set_cell(0, down, 1, WALL)
-		if get_cell_atlas_coords(0, left) == ROOF: set_cell(0, left, 1, WALL)
-		if get_cell_atlas_coords(0, right) == ROOF: set_cell(0, right, 1, WALL)
-		if get_cell_atlas_coords(0, up_left) == ROOF: set_cell(0, up_left, 1, WALL)
-		if get_cell_atlas_coords(0, up_right) == ROOF: set_cell(0, up_right, 1, WALL)
-		if get_cell_atlas_coords(0, down_left) == ROOF: set_cell(0, down_left, 1, WALL)
-		if get_cell_atlas_coords(0, down_right) == ROOF: set_cell(0, down_right, 1, WALL)
-	
-## Returns how many neighbours are roof tiles. No diagonals.
-func check_direct_neighbours(x, y, cell_type):
-	var count = 0
-	
-	if get_cell_atlas_coords(0, Vector2i(x, y-1)) == cell_type: count+=1
-	if get_cell_atlas_coords(0, Vector2i(x, y+1)) == cell_type: count+=1
-	if get_cell_atlas_coords(0, Vector2i(x-1, y)) == cell_type: count+=1
-	if get_cell_atlas_coords(0, Vector2i(x+1, y)) == cell_type: count+=1
-	return count
