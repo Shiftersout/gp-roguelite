@@ -13,9 +13,6 @@ extends TileMap
 ## Minimum leaf splitting factor.
 @export var min_room_factor : float = 0.4
 
-## Tiles. NOTE: Change when working with real tileset
-const GROUND = Vector2i(0, 1)
-const WALL = Vector2i(1, 1)
 const ROOF = Vector2i(1, 0)
 
 var tree = {} ## A dictionary with the entire tree.
@@ -208,7 +205,6 @@ func connect_rooms(center1, center2):
 		w = abs(center1.x - center2.x)
 	
 	
-	##NEEDS TO BE FINISHED
 	else:
 		var xmin = min(center1.x, center2.x)
 		var xmax = max(center1.x, center2.x)
@@ -218,6 +214,9 @@ func connect_rooms(center1, center2):
 		for i in range(xmin, xmax):
 			for j in range(ymin, ymin+h):
 				cells_array.append(Vector2i(i, j))
+			
+		if get_cell_atlas_coords(0, Vector2i(xmax+1, ymin)) == ROOF:
+			xmin = xmax
 			
 		for i in range(xmin, xmin+h):
 			for j in range(ymin, ymax):
