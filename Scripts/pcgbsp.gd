@@ -27,7 +27,7 @@ var path
 func _ready():
 	## Working with seeds is not necessary for now.
 	randomize()
-	generate()
+	#generate()
 
 ## Makes all steps to generating the map in order.
 func generate():

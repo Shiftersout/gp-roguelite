@@ -58,6 +58,9 @@ animations = [{
 size = Vector2(10, 8)
 
 [node name="Enemy_PH" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
+metadata/room_position = Vector2(0, 0)
+metadata/room_size = Vector2(160, 160)
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nnmx7")
@@ -73,12 +76,19 @@ shape = SubResource("RectangleShape2D_6spxd")
 script = ExtResource("2_tc3km")
 initial_state = NodePath("Idle")
 
-[node name="Chase" type="Node" parent="State_machine"]
+[node name="Chase" type="Node" parent="State_machine" node_paths=PackedStringArray("enemy", "sprite", "navigation")]
 script = ExtResource("3_sktje")
+enemy = NodePath("../..")
+sprite = NodePath("../../Sprite2D")
+navigation = NodePath("../../NavigationAgent2D")
 
-[node name="Idle" type="Node" parent="State_machine" node_paths=PackedStringArray("sprite")]
+[node name="Idle" type="Node" parent="State_machine" node_paths=PackedStringArray("enemy", "sprite")]
 script = ExtResource("3_k4lrc")
+enemy = NodePath("../..")
 sprite = NodePath("../../Sprite2D")
 
-[node name="Patrol" type="Node" parent="State_machine"]
+[node name="Patrol" type="Node" parent="State_machine" node_paths=PackedStringArray("enemy", "sprite", "navigation")]
 script = ExtResource("5_l6hdj")
+enemy = NodePath("../..")
+sprite = NodePath("../../Sprite2D")
+navigation = NodePath("../../NavigationAgent2D")

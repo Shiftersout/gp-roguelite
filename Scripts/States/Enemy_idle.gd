@@ -5,17 +5,19 @@ extends State
 @export var sprite : AnimatedSprite2D
 
 @export_group("Customizables")
-@export var detection_range : int = 60
+@export var detection_range : int = 100
 
-var timer := Timer.new()
+var timer : Timer
 var player : CharacterBody2D
 
 func Enter():
-	player = get_tree().get_first_node_in_group("Player")
+	timer = Timer.new()
+	print_debug("Idle")
+	player = get_tree().get_first_node_in_group("player")
 	sprite.play("idle")
 	add_child(timer)
 	timer.wait_time = randf_range(1.0, 3.0)
-	timer.connect("timeout", _on_timer_timeout())
+	timer.connect("timeout", _on_timer_timeout)
 	timer.start()
 	
 func Exit():
