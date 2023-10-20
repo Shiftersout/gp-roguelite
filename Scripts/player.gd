@@ -6,7 +6,7 @@ extends CharacterBody2D
 @onready var weapon = $Weapon
 @onready var raycast = $RayCast2D
 @onready var weapon_animation = $Weapon/WeaponAnimationPlayer
-@onready var particles = $Weapon/WeaponNode/GPUParticles2D
+@onready var particles = $Weapon/WeaponNode/DefaultParticles
 
 var h_direction = 1
 

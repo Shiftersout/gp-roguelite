@@ -10,8 +10,28 @@ extends State
 
 var player : CharacterBody2D
 
+func _ready():
+	player = get_tree().get_first_node_in_group("player")
+
 func Enter():
 	print_debug("Chase")
 	sprite.play("chase")
-	player = get_tree().get_first_node_in_group("player")
-	navigation.target_desired_distance = 16.0
+	navigation.target_desired_distance = 32.0
+
+func Exit():
+	pass
+	
+func Physics_Update(_delta: float):
+	if navigation.is_target_reached():
+		Transitioned.emit(self, "Attack")
+		return
+	
+	navigation.target_position = player.global_position
+	var new_velocity = (navigation.get_next_path_position() - enemy.global_position).normalized()
+	new_velocity = new_velocity * move_speed
+	enemy.velocity = new_velocity
+	if enemy.velocity.x > 0:
+		sprite.flip_h = false
+	else:
+		sprite.flip_h = true
+	enemy.move_and_slide()

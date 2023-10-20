@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://d1sg5e5fjd5mj"]
+[gd_scene load_steps=14 format=3 uid="uid://d1sg5e5fjd5mj"]
 
 [ext_resource type="Texture2D" uid="uid://t5s0xm64w01e" path="res://Sprites/ph_enemy.png" id="1_585dm"]
 [ext_resource type="Script" path="res://Scripts/States/State_machine.gd" id="2_tc3km"]
 [ext_resource type="Script" path="res://Scripts/States/Enemy_idle.gd" id="3_k4lrc"]
 [ext_resource type="Script" path="res://Scripts/States/Enemy_chase.gd" id="3_sktje"]
 [ext_resource type="Script" path="res://Scripts/States/Enemy_patrol.gd" id="5_l6hdj"]
+[ext_resource type="Script" path="res://Scripts/States/Attack_meelee.gd" id="6_lgjg6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s8acp"]
 atlas = ExtResource("1_585dm")
@@ -92,3 +93,6 @@ script = ExtResource("5_l6hdj")
 enemy = NodePath("../..")
 sprite = NodePath("../../Sprite2D")
 navigation = NodePath("../../NavigationAgent2D")
+
+[node name="Attack" type="Node" parent="State_machine"]
+script = ExtResource("6_lgjg6")
