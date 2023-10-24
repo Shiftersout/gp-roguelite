@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t5s0xm64w01e"
-path="res://.godot/imported/ph_enemy.png-3eac97b697e9d9eab5c238c6f6e9adf9.ctex"
+uid="uid://cpsllce2168d1"
+path="res://.godot/imported/ph_sword.png-cdbeb1043a81c79d03a8f7cbc06df672.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/ph_enemy.png"
-dest_files=["res://.godot/imported/ph_enemy.png-3eac97b697e9d9eab5c238c6f6e9adf9.ctex"]
+source_file="res://Sprites/weapons/ph_sword.png"
+dest_files=["res://.godot/imported/ph_sword.png-cdbeb1043a81c79d03a8f7cbc06df672.ctex"]
 
 [params]
 

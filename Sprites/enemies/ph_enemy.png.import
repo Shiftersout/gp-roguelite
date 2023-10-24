@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdutjtm328wfh"
-path="res://.godot/imported/tileset-test.png-5db954e9c67619b3a89f8268f00f3877.ctex"
+uid="uid://t5s0xm64w01e"
+path="res://.godot/imported/ph_enemy.png-05af2e028f5bc0ed9091d789148ab2c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/tileset-test.png"
-dest_files=["res://.godot/imported/tileset-test.png-5db954e9c67619b3a89f8268f00f3877.ctex"]
+source_file="res://Sprites/enemies/ph_enemy.png"
+dest_files=["res://.godot/imported/ph_enemy.png-05af2e028f5bc0ed9091d789148ab2c5.ctex"]
 
 [params]
 

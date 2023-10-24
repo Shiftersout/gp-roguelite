@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpsllce2168d1"
-path="res://.godot/imported/ph_sword.png-2346dd5401e667424bbe2babc68d1011.ctex"
+uid="uid://cdutjtm328wfh"
+path="res://.godot/imported/tileset-test.png-d94aac9a605fef5614b481ddd70892a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/ph_sword.png"
-dest_files=["res://.godot/imported/ph_sword.png-2346dd5401e667424bbe2babc68d1011.ctex"]
+source_file="res://Sprites/tilesets/tileset-test.png"
+dest_files=["res://.godot/imported/tileset-test.png-d94aac9a605fef5614b481ddd70892a9.ctex"]
 
 [params]
 

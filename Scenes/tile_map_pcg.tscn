@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://bw67e8mrqn5vd"]
 
-[ext_resource type="Texture2D" uid="uid://wl1jcmpk2gno" path="res://Sprites/tsgp.png" id="1_hnthj"]
+[ext_resource type="Texture2D" uid="uid://wl1jcmpk2gno" path="res://Sprites/tilesets/tsgp.png" id="1_b8chm"]
+[ext_resource type="Texture2D" uid="uid://bgsnbhas5eyv8" path="res://Sprites/tilesets/tileset_map1.png" id="2_jvob3"]
 [ext_resource type="Script" path="res://Scripts/pcgbsp.gd" id="2_r7qqh"]
-[ext_resource type="Texture2D" uid="uid://bgsnbhas5eyv8" path="res://Sprites/tileset_map1.png" id="2_yd8t6"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ua6he"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -10,7 +10,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1gry7"]
-texture = ExtResource("1_hnthj")
+texture = ExtResource("1_b8chm")
 1:0/0 = 0
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:0/0/physics_layer_0/angular_velocity = 0.0
@@ -29,7 +29,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0amej"]
-texture = ExtResource("2_yd8t6")
+texture = ExtResource("2_jvob3")
 1:0/0 = 0
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:0/0/physics_layer_0/angular_velocity = 0.0

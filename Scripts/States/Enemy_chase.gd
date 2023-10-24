@@ -4,6 +4,7 @@ extends State
 @export var enemy: CharacterBody2D
 @export var sprite: AnimatedSprite2D
 @export var navigation: NavigationAgent2D
+@export var attack : Node2D
 
 @export_group("Customizables")
 @export var move_speed := 30.0
@@ -17,6 +18,7 @@ func Enter():
 	print_debug("Chase")
 	sprite.play("chase")
 	navigation.target_desired_distance = 32.0
+	navigation.target_position = player.global_position
 
 func Exit():
 	pass
@@ -25,6 +27,8 @@ func Physics_Update(_delta: float):
 	if navigation.is_target_reached():
 		Transitioned.emit(self, "Attack")
 		return
+	
+	attack.look_at(player.global_position)
 	
 	navigation.target_position = player.global_position
 	var new_velocity = (navigation.get_next_path_position() - enemy.global_position).normalized()

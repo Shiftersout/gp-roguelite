@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dr0wia6eeac7o"
-path="res://.godot/imported/sword.png-1cbf2b4fd1efdbc747c0161ef69297ef.ctex"
+uid="uid://b88287ahok4r1"
+path="res://.godot/imported/ph_enemy_meelee.png-303fcbcd4a474ca4500b296d0d99312b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/sword.png"
-dest_files=["res://.godot/imported/sword.png-1cbf2b4fd1efdbc747c0161ef69297ef.ctex"]
+source_file="res://Sprites/enemies/ph_enemy_meelee.png"
+dest_files=["res://.godot/imported/ph_enemy_meelee.png-303fcbcd4a474ca4500b296d0d99312b.ctex"]
 
 [params]
 

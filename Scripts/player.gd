@@ -3,12 +3,18 @@ extends CharacterBody2D
 ## The speed of the character.
 @export var move_speed : float = 128
 @onready var sprite = $AnimatedSprite2D
-@onready var weapon = $Weapon
+@onready var hand = $Hand
 @onready var raycast = $RayCast2D
-@onready var weapon_animation = $Weapon/WeaponAnimationPlayer
-@onready var particles = $Weapon/WeaponNode/DefaultParticles
 
 var h_direction = 1
+var weapon : Node2D
+var weapon_animation : AnimationPlayer
+var weapon_particles : GPUParticles2D
+
+func _ready():
+	weapon = hand.get_child(0)
+	weapon_animation = weapon.get_node("AnimationPlayer")
+	weapon_particles = weapon.get_node("WeaponNode/GPUParticles2D")
 
 func _physics_process(_delta):
 	move()
@@ -41,7 +47,7 @@ func flipSprite():
 	
 ## Rotates the weapon
 func rotateWeapon():
-	weapon.look_at(get_global_mouse_position())
+	hand.look_at(get_global_mouse_position())
 	raycast.look_at(get_global_mouse_position())
 
 func attack():
@@ -49,14 +55,6 @@ func attack():
 		weapon_animation.play("charge")
 	elif Input.is_action_just_released("attack"):
 		if weapon_animation.is_playing() and weapon_animation.current_animation == "charge":
-			weapon_animation.play("cancel_attack")
-		elif particles.emitting:
+			weapon_animation.play("RESET")
+		elif weapon_particles.emitting:
 			weapon_animation.play("attack")
-	
-	if weapon_animation.current_animation == "attack" and !weapon_animation.is_playing():
-		weapon_animation.play("cancel_attack")
-
-
-func _on_weapon_animation_player_animation_finished(anim_name):
-	if anim_name == "attack":
-		weapon_animation.play("cancel_attack")
