@@ -24,11 +24,13 @@ func Exit():
 	pass
 	
 func Physics_Update(_delta: float):
+	if not player:
+		Transitioned.emit(self, "Idle")
+	
+	attack.look_at(player.global_position)
 	if navigation.is_target_reached():
 		Transitioned.emit(self, "Attack")
 		return
-	
-	attack.look_at(player.global_position)
 	
 	navigation.target_position = player.global_position
 	var new_velocity = (navigation.get_next_path_position() - enemy.global_position).normalized()

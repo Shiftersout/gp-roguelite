@@ -1,10 +1,13 @@
 extends CharacterBody2D
 
-## The speed of the character.
+@export_group("status")
 @export var move_speed : float = 128
+@export var health_points : int = 6
+
 @onready var sprite = $AnimatedSprite2D
 @onready var hand = $Hand
 @onready var raycast = $RayCast2D
+@onready var animation = $AnimationPlayer
 
 var h_direction = 1
 var weapon : Node2D
@@ -58,3 +61,12 @@ func attack():
 			weapon_animation.play("RESET")
 		elif weapon_particles.emitting:
 			weapon_animation.play("attack")
+
+func take_damage(damage):
+	health_points -= damage
+	animation.play("take_damage")
+
+func _on_hurt_box_area_entered(area):
+	if area.is_in_group("enemy_hitbox"):
+		take_damage(area.damage)
+		

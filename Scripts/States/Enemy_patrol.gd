@@ -16,8 +16,8 @@ var room_size : Vector2
 
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
-	room_position = enemy.get_meta("room_position")
-	room_size = enemy.get_meta("room_size")
+	room_position = enemy.room_position
+	room_size = enemy.room_size
 
 func Enter():
 	print_debug("Patrol")
@@ -29,14 +29,15 @@ func Enter():
 	navigation.target_position = desired_position
 
 func Physics_Update(_delta: float):
-	var direction = player.global_position - enemy.global_position
-	if direction.length() < detection_range:
-		Transitioned.emit(self, "Chase")
-		return
+	if player:
+		var direction = player.global_position - enemy.global_position
+		if direction.length() < detection_range:
+			Transitioned.emit(self, "Chase")
+			return
 		
-	if navigation.is_navigation_finished():
-		Transitioned.emit(self, "Idle")
-		return
+		if navigation.is_navigation_finished():
+			Transitioned.emit(self, "Idle")
+			return
 	
 	var new_velocity = (navigation.get_next_path_position() - enemy.global_position).normalized()
 	new_velocity = new_velocity * move_speed

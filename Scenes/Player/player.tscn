@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bt0wbs7fi3ffm"]
+[gd_scene load_steps=14 format=3 uid="uid://bt0wbs7fi3ffm"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_q36eq"]
 [ext_resource type="Texture2D" uid="uid://btoy20yylfyxx" path="res://Sprites/playerphnohandsanim.png" id="2_ems5l"]
@@ -48,6 +48,71 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4eio"]
 size = Vector2(12, 11)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1ficd"]
+radius = 6.0
+height = 18.0
+
+[sub_resource type="Animation" id="Animation_3ap13"]
+resource_name = "take_damage"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.174533, 0.0, -0.174533, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtBox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_7n7me"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtBox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fl8u5"]
+_data = {
+"RESET": SubResource("Animation_7n7me"),
+"take_damage": SubResource("Animation_3ap13")
+}
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_q36eq")
@@ -62,6 +127,12 @@ frame_progress = 0.0319945
 position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_o4eio")
 
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CapsuleShape2D_1ficd")
+debug_color = Color(1, 0, 0.0823529, 0.419608)
+
 [node name="Hand" type="Node2D" parent="."]
 
 [node name="Sword" parent="Hand" instance=ExtResource("3_ohua2")]
@@ -69,5 +140,12 @@ shape = SubResource("RectangleShape2D_o4eio")
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(30, 0)
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fl8u5")
+}
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

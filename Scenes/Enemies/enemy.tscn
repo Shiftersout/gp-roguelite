@@ -1,10 +1,13 @@
-[gd_scene load_steps=26 format=3 uid="uid://d1sg5e5fjd5mj"]
+[gd_scene load_steps=35 format=3 uid="uid://d1sg5e5fjd5mj"]
 
+[ext_resource type="Script" path="res://Scripts/enemy/enemy.gd" id="1_5ih7s"]
 [ext_resource type="Texture2D" uid="uid://t5s0xm64w01e" path="res://Sprites/enemies/ph_enemy.png" id="1_p6vn0"]
+[ext_resource type="Texture2D" uid="uid://cr25acsxdiibv" path="res://Sprites/enemies/exclamation.png" id="2_ixx54"]
 [ext_resource type="Script" path="res://Scripts/States/State_machine.gd" id="2_tc3km"]
 [ext_resource type="Texture2D" uid="uid://b88287ahok4r1" path="res://Sprites/enemies/ph_enemy_meelee.png" id="2_x2713"]
 [ext_resource type="Script" path="res://Scripts/States/Enemy_idle.gd" id="3_k4lrc"]
 [ext_resource type="Script" path="res://Scripts/States/Enemy_chase.gd" id="3_sktje"]
+[ext_resource type="PackedScene" uid="uid://ccgu3h3tb36j1" path="res://Scenes/Enemies/enemy_hitbox.tscn" id="4_e5v21"]
 [ext_resource type="Script" path="res://Scripts/States/Enemy_patrol.gd" id="5_l6hdj"]
 [ext_resource type="Script" path="res://Scripts/States/Attack_meelee.gd" id="6_lgjg6"]
 
@@ -56,8 +59,46 @@ animations = [{
 "speed": 6.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2quns"]
+atlas = ExtResource("2_ixx54")
+region = Rect2(0, 0, 3, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8wdp"]
+atlas = ExtResource("2_ixx54")
+region = Rect2(3, 0, 3, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0lv5"]
+atlas = ExtResource("2_ixx54")
+region = Rect2(6, 0, 3, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jobcf"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2quns")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j8wdp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o0lv5")
+}],
+"loop": false,
+"name": &"warning",
+"speed": 3.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6spxd"]
 size = Vector2(10, 8)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ld8bu"]
+radius = 5.0
+height = 10.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydj0q"]
 atlas = ExtResource("2_x2713")
@@ -114,9 +155,48 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aljn2"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jnosc"]
 radius = 7.0
-height = 18.0
+height = 20.0
+
+[sub_resource type="Animation" id="Animation_5nht8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../WarningSprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EnemyHitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_hxxle"]
 resource_name = "attack"
@@ -148,63 +228,85 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/2/path = NodePath("../../WarningSprite:animation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("EnemyHitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
 
-[sub_resource type="Animation" id="Animation_5nht8"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_tdvir"]
+resource_name = "warning"
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/0/path = NodePath("../../WarningSprite:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [&"warning", &"default"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/path = NodePath("../../WarningSprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [&"default"]
+"values": [0, 1, 2, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h87g4"]
 _data = {
 "RESET": SubResource("Animation_5nht8"),
-"attack": SubResource("Animation_hxxle")
+"attack": SubResource("Animation_hxxle"),
+"warning": SubResource("Animation_tdvir")
 }
 
 [node name="Enemy_PH" type="CharacterBody2D" groups=["enemy"]]
-collision_layer = 2
-metadata/room_position = Vector2(0, 0)
-metadata/room_size = Vector2(160, 160)
+script = ExtResource("1_5ih7s")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nnmx7")
 animation = &"idle"
+
+[node name="WarningSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -10)
+sprite_frames = SubResource("SpriteFrames_jobcf")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 4.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6spxd")
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CapsuleShape2D_ld8bu")
+debug_color = Color(1, 0.027451, 0, 0.419608)
 
 [node name="Attack" type="Node2D" parent="."]
 
@@ -214,12 +316,13 @@ position = Vector2(20, 0)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Attack/MeeleeAttack"]
 sprite_frames = SubResource("SpriteFrames_8y81m")
 
-[node name="Area2D" type="Area2D" parent="Attack/MeeleeAttack"]
+[node name="EnemyHitbox" parent="Attack/MeeleeAttack" instance=ExtResource("4_e5v21")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack/MeeleeAttack/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack/MeeleeAttack/EnemyHitbox"]
 position = Vector2(-2, 0)
-shape = SubResource("CapsuleShape2D_aljn2")
+shape = SubResource("CapsuleShape2D_jnosc")
 disabled = true
+debug_color = Color(0.682353, 0.501961, 0, 0.419608)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Attack/MeeleeAttack"]
 libraries = {
@@ -252,4 +355,5 @@ navigation = NodePath("../../NavigationAgent2D")
 script = ExtResource("6_lgjg6")
 animation = NodePath("../../Attack/MeeleeAttack/AnimationPlayer")
 
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="animation_finished" from="Attack/MeeleeAttack/AnimationPlayer" to="State_machine/Attack" method="_on_animation_player_animation_finished"]

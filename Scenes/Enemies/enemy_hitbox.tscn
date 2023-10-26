@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccgu3h3tb36j1"]
+
+[ext_resource type="Script" path="res://Scripts/enemy/enemy_hitbox.gd" id="1_7dv7g"]
+
+[node name="EnemyHitbox" type="Area2D" groups=["enemy_hitbox"]]
+script = ExtResource("1_7dv7g")
