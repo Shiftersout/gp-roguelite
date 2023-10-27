@@ -1,9 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://ddhvkxs1ngaha"]
+[gd_scene load_steps=20 format=3 uid="uid://ddhvkxs1ngaha"]
 
 [ext_resource type="Texture2D" uid="uid://cpsllce2168d1" path="res://Sprites/weapons/ph_sword.png" id="1_s3ovk"]
-[ext_resource type="PackedScene" path="res://Scenes/Player/default_particles.tscn" id="2_3rsrc"]
+[ext_resource type="Shader" path="res://Scenes/Player/white.gdshader" id="1_ugsrg"]
+[ext_resource type="PackedScene" uid="uid://bjh51cg126ool" path="res://Scenes/Player/default_particles.tscn" id="2_3rsrc"]
 [ext_resource type="PackedScene" uid="uid://clfyydw860c1r" path="res://Scenes/Player/player_hitbox.tscn" id="3_7uq0x"]
 [ext_resource type="Script" path="res://Scripts/player/player_hitbox.gd" id="4_276jc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mcpan"]
+shader = ExtResource("1_ugsrg")
+shader_parameter/active = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xxo2t"]
 atlas = ExtResource("1_s3ovk")
@@ -133,6 +138,30 @@ tracks/4/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WeaponNode/AnimatedSprite2D:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WeaponNode/AnimatedSprite2D:use_parent_material")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_kmkhf"]
 resource_name = "attack"
@@ -221,6 +250,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WeaponNode/AnimatedSprite2D:use_parent_material")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_t65ep"]
 resource_name = "charge"
@@ -297,6 +338,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WeaponNode/AnimatedSprite2D:use_parent_material")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3hi3a"]
 _data = {
@@ -309,6 +362,7 @@ _data = {
 position = Vector2(6, 0)
 
 [node name="WeaponNode" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_mcpan")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="WeaponNode"]
 position = Vector2(13, 5.96046e-08)

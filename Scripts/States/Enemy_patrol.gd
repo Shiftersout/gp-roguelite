@@ -1,5 +1,7 @@
 extends State
 
+#patrol logic
+
 @export_group("Nodes")
 @export var enemy: CharacterBody2D
 @export var sprite: AnimatedSprite2D
@@ -20,6 +22,7 @@ func _ready():
 	room_size = enemy.room_size
 
 func Enter():
+	#upon entering, randomizes a coordinate in the room to walk to
 	print_debug("Patrol")
 	sprite.play("chase")
 	var des_x = randf_range(room_position.x, room_position.x + room_size.x)
@@ -30,21 +33,27 @@ func Enter():
 
 func Physics_Update(_delta: float):
 	if player:
+		#if it finds a player, transition to chase
 		var direction = player.global_position - enemy.global_position
 		if direction.length() < detection_range:
 			Transitioned.emit(self, "Chase")
 			return
 		
+		#if the navigation finishes, transition to idle
 		if navigation.is_navigation_finished():
 			Transitioned.emit(self, "Idle")
 			return
 	
+	#move towards desired coordinates with navigation
 	var new_velocity = (navigation.get_next_path_position() - enemy.global_position).normalized()
 	new_velocity = new_velocity * move_speed
 	enemy.velocity = new_velocity
+	
+	#flips sprite
 	if enemy.velocity.x > 0:
 		sprite.flip_h = false
 	else:
 		sprite.flip_h = true
+		
 	enemy.move_and_slide()
 	

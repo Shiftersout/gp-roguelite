@@ -13,6 +13,10 @@ extends TileMap
 ## Minimum leaf splitting factor.
 @export var min_room_factor : float = 0.4
 
+@export_group("Other options")
+## Generate on _ready()
+@export var auto_generate : bool = false
+
 ## Tiles. NOTE: Change when working with real tileset
 const ROOF = Vector2i(1, 0)
 
@@ -27,7 +31,8 @@ var path
 func _ready():
 	## Working with seeds is not necessary for now.
 	randomize()
-	#generate()
+	if auto_generate:
+		generate()
 
 ## Makes all steps to generating the map in order.
 func generate():

@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bt0wbs7fi3ffm"]
+[gd_scene load_steps=15 format=3 uid="uid://bt0wbs7fi3ffm"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_q36eq"]
+[ext_resource type="Script" path="res://Scripts/player/player.gd" id="1_hy678"]
 [ext_resource type="Texture2D" uid="uid://btoy20yylfyxx" path="res://Sprites/playerphnohandsanim.png" id="2_ems5l"]
 [ext_resource type="PackedScene" uid="uid://ddhvkxs1ngaha" path="res://Scenes/Weapons/sword.tscn" id="3_ohua2"]
+[ext_resource type="Texture2D" uid="uid://yvbgfmvnl000" path="res://Sprites/neutral_point_light.webp" id="4_5g3vt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qkqgf"]
 atlas = ExtResource("2_ems5l")
@@ -52,6 +53,33 @@ size = Vector2(12, 11)
 radius = 6.0
 height = 18.0
 
+[sub_resource type="Animation" id="Animation_7n7me"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtBox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_3ap13"]
 resource_name = "take_damage"
 length = 0.4
@@ -80,33 +108,6 @@ tracks/1/keys = {
 "values": [false, true]
 }
 
-[sub_resource type="Animation" id="Animation_7n7me"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HurtBox:monitoring")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fl8u5"]
 _data = {
 "RESET": SubResource("Animation_7n7me"),
@@ -115,7 +116,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
-script = ExtResource("1_q36eq")
+script = ExtResource("1_hy678")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gubg2")
@@ -147,5 +148,10 @@ libraries = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+shadow_enabled = true
+texture = ExtResource("4_5g3vt")
+texture_scale = 0.2
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
