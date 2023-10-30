@@ -1,57 +1,85 @@
-[gd_scene load_steps=15 format=3 uid="uid://bt0wbs7fi3ffm"]
+[gd_scene load_steps=19 format=3 uid="uid://bt0wbs7fi3ffm"]
 
 [ext_resource type="Script" path="res://Scripts/player/player.gd" id="1_hy678"]
-[ext_resource type="Texture2D" uid="uid://btoy20yylfyxx" path="res://Sprites/playerphnohandsanim.png" id="2_ems5l"]
+[ext_resource type="Texture2D" uid="uid://cxp1l5qvxnygf" path="res://Sprites/player/player_idle.png" id="2_0q8xq"]
+[ext_resource type="Texture2D" uid="uid://dbcx3qqrg143v" path="res://Sprites/player/player_walking.png" id="3_018mt"]
 [ext_resource type="PackedScene" uid="uid://ddhvkxs1ngaha" path="res://Scenes/Weapons/sword.tscn" id="3_ohua2"]
-[ext_resource type="Texture2D" uid="uid://yvbgfmvnl000" path="res://Sprites/neutral_point_light.webp" id="4_5g3vt"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qkqgf"]
-atlas = ExtResource("2_ems5l")
-region = Rect2(0, 0, 20, 20)
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2gem"]
+atlas = ExtResource("2_0q8xq")
+region = Rect2(0, 0, 20, 34)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_th0ow"]
-atlas = ExtResource("2_ems5l")
-region = Rect2(20, 0, 20, 20)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfq4h"]
+atlas = ExtResource("2_0q8xq")
+region = Rect2(20, 0, 20, 34)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cv2hl"]
-atlas = ExtResource("2_ems5l")
-region = Rect2(20, 0, 20, 20)
+[sub_resource type="AtlasTexture" id="AtlasTexture_py7v8"]
+atlas = ExtResource("2_0q8xq")
+region = Rect2(40, 0, 20, 34)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_me2no"]
-atlas = ExtResource("2_ems5l")
-region = Rect2(40, 0, 20, 20)
+[sub_resource type="AtlasTexture" id="AtlasTexture_jxwur"]
+atlas = ExtResource("2_0q8xq")
+region = Rect2(60, 0, 20, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcwnu"]
+atlas = ExtResource("3_018mt")
+region = Rect2(0, 0, 20, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tacun"]
+atlas = ExtResource("3_018mt")
+region = Rect2(20, 0, 20, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qp7tl"]
+atlas = ExtResource("3_018mt")
+region = Rect2(40, 0, 20, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_le1db"]
+atlas = ExtResource("3_018mt")
+region = Rect2(60, 0, 20, 34)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gubg2"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qkqgf")
+"texture": SubResource("AtlasTexture_k2gem")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_th0ow")
+"texture": SubResource("AtlasTexture_qfq4h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_py7v8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jxwur")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cv2hl")
+"texture": SubResource("AtlasTexture_rcwnu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_me2no")
+"texture": SubResource("AtlasTexture_tacun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qp7tl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_le1db")
 }],
 "loop": true,
 "name": &"walking",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4eio"]
-size = Vector2(12, 11)
+size = Vector2(12, 15)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1ficd"]
 radius = 6.0
-height = 18.0
+height = 26.0
 
 [sub_resource type="Animation" id="Animation_7n7me"]
 length = 0.001
@@ -120,17 +148,16 @@ script = ExtResource("1_hy678")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gubg2")
-animation = &"idle"
-frame = 1
-frame_progress = 0.0319945
+animation = &"walking"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4.5)
+position = Vector2(0, 9.5)
 shape = SubResource("RectangleShape2D_o4eio")
 
 [node name="HurtBox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_1ficd")
 debug_color = Color(1, 0, 0.0823529, 0.419608)
 
@@ -148,10 +175,5 @@ libraries = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-shadow_enabled = true
-texture = ExtResource("4_5g3vt")
-texture_scale = 0.2
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

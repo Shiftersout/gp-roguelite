@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btoy20yylfyxx"
-path="res://.godot/imported/playerphnohandsanim.png-5050d82a35d43b0feb0cb24a71f33bc1.ctex"
+uid="uid://drn5whtdah5jy"
+path="res://.godot/imported/rat_idle.png-53b80186fa10dcf0e1ad26b751352c46.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/playerphnohandsanim.png"
-dest_files=["res://.godot/imported/playerphnohandsanim.png-5050d82a35d43b0feb0cb24a71f33bc1.ctex"]
+source_file="res://Sprites/npcs/rat_idle.png"
+dest_files=["res://.godot/imported/rat_idle.png-53b80186fa10dcf0e1ad26b751352c46.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://yvbgfmvnl000"
-path="res://.godot/imported/neutral_point_light.webp-683306ea528eea10118e57ac4c8874fb.ctex"
+uid="uid://btoy20yylfyxx"
+path="res://.godot/imported/playerphnohandsanim.png-895207fc868213b887535bb22a481189.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/neutral_point_light.webp"
-dest_files=["res://.godot/imported/neutral_point_light.webp-683306ea528eea10118e57ac4c8874fb.ctex"]
+source_file="res://Sprites/player/playerphnohandsanim.png"
+dest_files=["res://.godot/imported/playerphnohandsanim.png-895207fc868213b887535bb22a481189.ctex"]
 
 [params]
 

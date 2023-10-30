@@ -12,18 +12,27 @@ extends TileMap
 @export var room_amount : int = 10
 ## Minimum leaf splitting factor.
 @export var min_room_factor : float = 0.4
+## Tileset ID
+@export var tileset_id : int = 2
 
 @export_group("Other options")
 ## Generate on _ready()
 @export var auto_generate : bool = false
 
-## Tiles. NOTE: Change when working with real tileset
 const ROOF = Vector2i(1, 0)
+var terrain_id = tileset_id-2
 
 var tree = {} ## A dictionary with the entire tree.
 var leaves = [] ## An array that has every id of every pair of leaves.
 var leaf_id = 0 ## Current leaf id.
+
 var rooms = [] ## An array containing all rooms in the map.
+var enemy_rooms = [] ## An array containing indexes to enemy rooms.
+var end_rooms = [] ## An array containing indexes to end rooms.
+var spawn_room : int ## The room in wich the player spawns.
+var item_room : int ## The room with a garanteed item.
+var npc_room : int ## The room with an NPC.
+var boss_room : int ##The boss room.
 
 var path
 
@@ -47,15 +56,19 @@ func generate():
 	path = find_mst(rooms_c)
 	join_rooms()
 	
+	set_special_rooms()
+	
 ## Fills the entire map with roof tiles.
 func fill_roof():
 	for x in range(0, map_w):
 		for y in range(0, map_h):
-			set_cell(0, Vector2(x, y), 2, Vector2i(1, 0))
+			set_cell(0, Vector2(x, y), tileset_id, Vector2i(1, 0))
 	
 ## Starts/restarts the tree dictionary.
 func start_tree():
 	rooms = []
+	end_rooms = []
+	enemy_rooms = []
 	tree = {}
 	leaves = []
 	leaf_id = 0
@@ -166,7 +179,7 @@ func create_rooms():
 			for y in range(r.y, r.y + r.h):
 				cells_array.append(Vector2i(x, y))
 				
-	set_cells_terrain_connect(0, cells_array, 0, 0, true)
+	set_cells_terrain_connect(0, cells_array, terrain_id, 0, true)
 
 ## Joins rooms with corridors, by connecting every leaf pair.
 func join_rooms():
@@ -231,7 +244,7 @@ func connect_rooms(center1, center2):
 			for j in range(ymin, ymax):
 				cells_array.append(Vector2i(i, j))
 				
-		set_cells_terrain_connect(0, cells_array, 0, 0, true)
+		set_cells_terrain_connect(0, cells_array, terrain_id, 0, true)
 		add_connection(center1, center2)
 		return
 		
@@ -241,10 +254,9 @@ func connect_rooms(center1, center2):
 	for i in range(x, x+w):
 		for j in range(y, y+h):
 			if get_cell_atlas_coords(0, Vector2i(i, j)) == ROOF:
-				#set_cell(0, Vector2i(i,j), 1, GROUND)
 				cells_array.append(Vector2i(i, j))
 				
-	set_cells_terrain_connect(0, cells_array, 0, 0, true)
+	set_cells_terrain_connect(0, cells_array, terrain_id, 0, true)
 	add_connection(center1, center2)
 
 ## Adds the connection bewteen each room so every room knows to wich other
@@ -282,3 +294,25 @@ func find_mst(room_positions):
 		room_positions.erase(min_pos)
 	
 	return path
+
+## Sets values for spawn, boss, item and boss room.
+func set_special_rooms():
+	## find every room that has only 1 connected room
+	for i in range(0, rooms.size()):
+		if rooms[i].connected_rooms.size() == 1:
+			end_rooms.append(i)
+		else:
+			enemy_rooms.append(i)
+	
+	## Creates everything again if there isn't at least 4 end rooms
+	if end_rooms.size() < 4:
+		print_debug("Falhou! Criando de novo")
+		generate()
+		return
+	
+	## Shuffles the array and sets randomly the dedicated rooms
+	end_rooms.shuffle()
+	spawn_room = end_rooms[0]
+	item_room = end_rooms[1]
+	npc_room = end_rooms[2]
+	boss_room = end_rooms[3]
