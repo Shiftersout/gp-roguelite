@@ -18,13 +18,14 @@ var room_size : Vector2
 
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
-	room_position = enemy.room_position
-	room_size = enemy.room_size
-
+	
 func Enter():
 	#upon entering, randomizes a coordinate in the room to walk to
-	print_debug("Patrol")
+	#print_debug("Patrol")
 	sprite.play("chase")
+	room_position = enemy.room_position
+	room_size = enemy.room_size
+	
 	var des_x = randf_range(room_position.x, room_position.x + room_size.x)
 	var des_y = randf_range(room_position.y, room_position.y + room_size.y)
 	desired_position = Vector2(des_x, des_y)

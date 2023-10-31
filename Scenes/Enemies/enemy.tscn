@@ -286,6 +286,7 @@ _data = {
 }
 
 [node name="Enemy_PH" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
 script = ExtResource("1_5ih7s")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]

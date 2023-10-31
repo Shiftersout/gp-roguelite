@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export_group("room_info")
 @export var room_position : Vector2
 @export var room_size : Vector2
+@export var room_index : int
 
 @export_group("status")
 @export var health_points : int = 2

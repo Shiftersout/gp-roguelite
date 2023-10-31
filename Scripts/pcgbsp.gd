@@ -14,6 +14,8 @@ extends TileMap
 @export var min_room_factor : float = 0.4
 ## Tileset ID
 @export var tileset_id : int = 2
+## Enemy scene (NEEDS CHANGE)
+@export var enemy_scene = preload("res://Scenes/Enemies/enemy.tscn")
 
 @export_group("Other options")
 ## Generate on _ready()
@@ -33,6 +35,10 @@ var spawn_room : int ## The room in wich the player spawns.
 var item_room : int ## The room with a garanteed item.
 var npc_room : int ## The room with an NPC.
 var boss_room : int ##The boss room.
+
+var hard_rooms = [] ## An array containing the indexes of hard enemy rooms
+var normal_rooms = [] ## An array containing the indexes of normal enemy rooms
+var enemy_rooms_nodes = [] ## An array containing the nodes with enemies
 
 var path
 
@@ -56,7 +62,9 @@ func generate():
 	path = find_mst(rooms_c)
 	join_rooms()
 	
-	set_special_rooms()
+	if set_special_rooms():
+		create_enemies()
+	
 	
 ## Fills the entire map with roof tiles.
 func fill_roof():
@@ -299,7 +307,7 @@ func find_mst(room_positions):
 func set_special_rooms():
 	## find every room that has only 1 connected room
 	for i in range(0, rooms.size()):
-		if rooms[i].connected_rooms.size() == 1:
+		if rooms[i].connected_rooms.size() == 1 && end_rooms.size() < 4:
 			end_rooms.append(i)
 		else:
 			enemy_rooms.append(i)
@@ -308,7 +316,7 @@ func set_special_rooms():
 	if end_rooms.size() < 4:
 		print_debug("Falhou! Criando de novo")
 		generate()
-		return
+		return false
 	
 	## Shuffles the array and sets randomly the dedicated rooms
 	end_rooms.shuffle()
@@ -316,3 +324,49 @@ func set_special_rooms():
 	item_room = end_rooms[1]
 	npc_room = end_rooms[2]
 	boss_room = end_rooms[3]
+	
+	return true
+
+func create_enemies():
+	enemy_rooms.shuffle()
+	var hard_rooms_amount = ceil(room_amount/3.0)
+	
+	for i in range(0, hard_rooms_amount-1):
+		if enemy_rooms[i]:
+			hard_rooms.append(enemy_rooms[i])
+	
+	for i in range(hard_rooms_amount-1, enemy_rooms.size()):
+		if enemy_rooms[i]:
+			normal_rooms.append(enemy_rooms[i])
+		
+	print_debug(enemy_rooms)
+	print_debug(hard_rooms)
+	print_debug(normal_rooms)
+	add_enemies(4, hard_rooms)
+	add_enemies(2, normal_rooms)
+	
+func add_enemies(amount : int, room_array):
+	for i in room_array:
+		var new_room = Node2D.new()
+		var new_enemies = []
+		
+		new_room.name = "room_" + str(i)
+		new_room.position = Vector2(rooms[i].x*16, rooms[i].y*16)
+		add_child(new_room)
+		enemy_rooms_nodes.append(new_room)
+		
+		for o in range(0, amount):
+			new_enemies.append(enemy_scene.instantiate())
+			new_room.add_child(new_enemies[o])
+			
+		for o in new_room.get_children():
+			var random_x = randi_range(32, (rooms[i].w * 16) - 32)
+			var random_y = randi_range(32, (rooms[i].h * 16) - 32)
+			o.position = Vector2(random_x, random_y)
+			
+			## ta meio zoado mas da pra consertar
+			o.room_position = Vector2(rooms[i].x*16+32, rooms[i].y*16+32)
+			o.room_size = Vector2(rooms[i].w*16-32, rooms[i].h*16-32)
+			o.room_index = i
+			print_debug(o.room_position)
+			print_debug(o.room_size)

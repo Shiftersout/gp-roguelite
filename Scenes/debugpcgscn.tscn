@@ -1,15 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://d6uq7t25yisc"]
+[gd_scene load_steps=3 format=3 uid="uid://d6uq7t25yisc"]
 
 [ext_resource type="PackedScene" uid="uid://bw67e8mrqn5vd" path="res://Scenes/tile_map_pcg.tscn" id="1_ok4ya"]
+[ext_resource type="PackedScene" uid="uid://bt0wbs7fi3ffm" path="res://Scenes/Player/player.tscn" id="2_t7dax"]
 
 [node name="debugscn" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(2866, 1510)
-zoom = Vector2(0.2, 0.2)
+position = Vector2(1887, 1031)
+zoom = Vector2(0.3, 0.3)
 
 [node name="TileMapPCG" parent="." instance=ExtResource("1_ok4ya")]
 map_w = 110
 map_h = 110
 min_room_size = 16
 auto_generate = true
+
+[node name="Player" parent="." instance=ExtResource("2_t7dax")]
+position = Vector2(-210, 294)
