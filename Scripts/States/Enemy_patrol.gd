@@ -13,7 +13,7 @@ extends State
 
 var desired_position : Vector2
 var player : CharacterBody2D
-var room_position : Vector2
+var room_top_left : Vector2
 var room_size : Vector2
 
 func _ready():
@@ -23,12 +23,12 @@ func Enter():
 	#upon entering, randomizes a coordinate in the room to walk to
 	#print_debug("Patrol")
 	sprite.play("chase")
-	room_position = enemy.room_position
+	room_top_left = enemy.room_top_left
 	room_size = enemy.room_size
 	
-	var des_x = randf_range(room_position.x, room_position.x + room_size.x)
-	var des_y = randf_range(room_position.y, room_position.y + room_size.y)
-	desired_position = Vector2(des_x, des_y)
+	var des_x = randf_range(room_top_left.x, room_top_left.x + room_size.x)
+	var des_y = randf_range(room_top_left.y, room_top_left.y + room_size.y)
+	desired_position = Vector2(des_x*16, des_y*16)
 	navigation.target_desired_distance = 0.0
 	navigation.target_position = desired_position
 

@@ -21,6 +21,8 @@ extends TileMap
 ## Generate on _ready()
 @export var auto_generate : bool = false
 
+var player : CharacterBody2D
+
 const ROOF = Vector2i(1, 0)
 var terrain_id = tileset_id-2
 
@@ -44,6 +46,7 @@ var path
 
 ## NOTE: change.
 func _ready():
+	player = get_tree().get_first_node_in_group("player")
 	## Working with seeds is not necessary for now.
 	randomize()
 	if auto_generate:
@@ -64,6 +67,7 @@ func generate():
 	
 	if set_special_rooms():
 		create_enemies()
+		spawn_player()
 	
 	
 ## Fills the entire map with roof tiles.
@@ -364,9 +368,17 @@ func add_enemies(amount : int, room_array):
 			var random_y = randi_range(32, (rooms[i].h * 16) - 32)
 			o.position = Vector2(random_x, random_y)
 			
-			## ta meio zoado mas da pra consertar
-			o.room_position = Vector2(rooms[i].x*16+32, rooms[i].y*16+32)
-			o.room_size = Vector2(rooms[i].w*16-32, rooms[i].h*16-32)
+			o.room_top_left = Vector2(rooms[i].x+2, rooms[i].y+2)
+			o.room_size = Vector2(rooms[i].w-4, rooms[i].h-4)
 			o.room_index = i
-			print_debug(o.room_position)
-			print_debug(o.room_size)
+
+func spawn_player():
+	player.position = Vector2(rooms[spawn_room].center.x*16, rooms[spawn_room].center.y*16)
+	
+#func _draw():
+#	draw_set_transform(Vector2(0, 0))
+#	for i in hard_rooms:
+#		draw_rect(Rect2((rooms[i].x+2)*16, (rooms[i].y+2)*16, (rooms[i].w-4)*16, (rooms[i].h-4)*16), Color.RED, false)
+#		
+#	for i in normal_rooms:
+#		draw_rect(Rect2((rooms[i].x+2)*16, (rooms[i].y+2)*16, (rooms[i].w-4)*16, (rooms[i].h-4)*16), Color.RED, false)

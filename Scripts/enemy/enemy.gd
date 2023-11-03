@@ -3,8 +3,8 @@ extends CharacterBody2D
 #Enemy logic
 
 @export_group("room_info")
-@export var room_position : Vector2
-@export var room_size : Vector2
+@export var room_top_left : Vector2
+@export var room_size: Vector2
 @export var room_index : int
 
 @export_group("status")
