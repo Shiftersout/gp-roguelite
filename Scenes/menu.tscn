@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmrggdtmeef5w"]
+[gd_scene load_steps=3 format=3 uid="uid://cmrggdtmeef5w"]
 
 [ext_resource type="Script" path="res://Scripts/menu.gd" id="1_84dkl"]
+[ext_resource type="FontFile" uid="uid://cmyuju23fvs8j" path="res://Font/Minecraftia-Regular.ttf" id="2_bht7x"]
 
 [node name="menu" type="Control"]
 layout_mode = 3
@@ -32,7 +33,8 @@ grow_vertical = 2
 [node name="Label" type="Label" parent="MainContainer"]
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
-theme_override_font_sizes/font_size = 42
+theme_override_fonts/font = ExtResource("2_bht7x")
+theme_override_font_sizes/font_size = 43
 text = "The Lost Preservatorium"
 vertical_alignment = 1
 
@@ -55,6 +57,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 auto_translate = false
 localize_numeral_system = false
+theme_override_fonts/font = ExtResource("2_bht7x")
 theme_override_font_sizes/font_size = 23
 text = "Jogar"
 
@@ -62,6 +65,7 @@ text = "Jogar"
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("2_bht7x")
 theme_override_font_sizes/font_size = 23
 text = "Creditos"
 
@@ -69,6 +73,7 @@ text = "Creditos"
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("2_bht7x")
 theme_override_font_sizes/font_size = 23
 text = "Opções"
 
@@ -77,6 +82,7 @@ custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_stretch_ratio = 0.6
+theme_override_fonts/font = ExtResource("2_bht7x")
 theme_override_font_sizes/font_size = 23
 text = "Sair
 "
