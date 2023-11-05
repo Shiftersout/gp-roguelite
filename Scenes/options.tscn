@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dct2gmywgcv5k"]
+[gd_scene load_steps=4 format=3 uid="uid://dct2gmywgcv5k"]
 
-[ext_resource type="FontFile" uid="uid://cmyuju23fvs8j" path="res://Font/Minecraftia-Regular.ttf" id="1_1noj5"]
 [ext_resource type="Script" path="res://Scripts/options.gd" id="1_wrx7g"]
+[ext_resource type="FontFile" uid="uid://c0s3dqn0rih02" path="res://Font/VT323-Regular.ttf" id="2_aqgb0"]
+[ext_resource type="Script" path="res://Scripts/HSlider.gd" id="3_cl0tl"]
 
 [node name="options" type="Control"]
 layout_mode = 3
@@ -24,24 +25,21 @@ color = Color(0.372549, 0.247059, 0.415686, 1)
 [node name="MainContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(550, 0)
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = -275.0
-offset_top = -249.5
 offset_right = 275.0
-offset_bottom = 249.5
+offset_bottom = 456.0
 grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Label" type="Label" parent="MainContainer"]
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("1_1noj5")
-theme_override_font_sizes/font_size = 42
+theme_override_constants/line_spacing = 250
+theme_override_fonts/font = ExtResource("2_aqgb0")
+theme_override_font_sizes/font_size = 68
 text = "Opções"
 vertical_alignment = 1
 
@@ -58,20 +56,28 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_constants/separation = 15
 
-[node name="Audio" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(250, 50)
+[node name="Label" type="Label" parent="MainContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("1_1noj5")
-theme_override_font_sizes/font_size = 23
-text = "Áudio"
+theme_override_fonts/font = ExtResource("2_aqgb0")
+theme_override_font_sizes/font_size = 33
+text = "Volume
+"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="MainContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+min_value = -80.0
+max_value = 1.0
+step = 0.0
+value = -41.0
+script = ExtResource("3_cl0tl")
 
 [node name="Back" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("1_1noj5")
-theme_override_font_sizes/font_size = 23
+theme_override_fonts/font = ExtResource("2_aqgb0")
+theme_override_font_sizes/font_size = 33
 text = "Voltar"
 
 [connection signal="pressed" from="MainContainer/HBoxContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

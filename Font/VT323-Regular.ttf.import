@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cmyuju23fvs8j"
-path="res://.godot/imported/Minecraftia-Regular.ttf-24417dad4c08263f97ab8fca90937f94.fontdata"
+uid="uid://c0s3dqn0rih02"
+path="res://.godot/imported/VT323-Regular.ttf-3684065a4e5036d4a2bc1c858bea847c.fontdata"
 
 [deps]
 
-source_file="res://Font/Minecraftia-Regular.ttf"
-dest_files=["res://.godot/imported/Minecraftia-Regular.ttf-24417dad4c08263f97ab8fca90937f94.fontdata"]
+source_file="res://Font/VT323-Regular.ttf"
+dest_files=["res://.godot/imported/VT323-Regular.ttf-3684065a4e5036d4a2bc1c858bea847c.fontdata"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cmrggdtmeef5w"]
 
 [ext_resource type="Script" path="res://Scripts/menu.gd" id="1_84dkl"]
-[ext_resource type="FontFile" uid="uid://cmyuju23fvs8j" path="res://Font/Minecraftia-Regular.ttf" id="2_bht7x"]
+[ext_resource type="FontFile" uid="uid://c0s3dqn0rih02" path="res://Font/VT323-Regular.ttf" id="3_0x0ln"]
 
 [node name="menu" type="Control"]
 layout_mode = 3
@@ -33,9 +33,10 @@ grow_vertical = 2
 [node name="Label" type="Label" parent="MainContainer"]
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_bht7x")
-theme_override_font_sizes/font_size = 43
-text = "The Lost Preservatorium"
+theme_override_fonts/font = ExtResource("3_0x0ln")
+theme_override_font_sizes/font_size = 48
+text = "The Lost Preservatorium
+"
 vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainContainer"]
@@ -57,35 +58,53 @@ layout_mode = 2
 size_flags_horizontal = 0
 auto_translate = false
 localize_numeral_system = false
-theme_override_fonts/font = ExtResource("2_bht7x")
-theme_override_font_sizes/font_size = 23
+theme_override_fonts/font = ExtResource("3_0x0ln")
+theme_override_font_sizes/font_size = 33
 text = "Jogar"
+alignment = 0
 
 [node name="Credits" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["button"]]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("2_bht7x")
-theme_override_font_sizes/font_size = 23
-text = "Creditos"
+theme_override_fonts/font = ExtResource("3_0x0ln")
+theme_override_font_sizes/font_size = 33
+text = "Créditos"
+alignment = 0
 
 [node name="Options" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["button"]]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("2_bht7x")
-theme_override_font_sizes/font_size = 23
-text = "Opções"
+theme_override_fonts/font = ExtResource("3_0x0ln")
+theme_override_font_sizes/font_size = 33
+text = "Configurções"
+alignment = 0
 
 [node name="Quit" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["button"]]
-custom_minimum_size = Vector2(150, 50)
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_stretch_ratio = 0.6
-theme_override_fonts/font = ExtResource("2_bht7x")
-theme_override_font_sizes/font_size = 23
+theme_override_fonts/font = ExtResource("3_0x0ln")
+theme_override_font_sizes/font_size = 33
 text = "Sair
 "
+alignment = 0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 516.0
+offset_right = 682.0
+offset_bottom = 620.0
+theme_override_fonts/font = ExtResource("3_0x0ln")
+theme_override_font_sizes/font_size = 20
+text = "Este jogo foi desenvolvido como parte das exigências para a
+obtenção do título de Tecnólogo em Jogos Digitais pela Faculdade de Tecnologia
+de Americana (Fatec Americana). Seus autores o disponibilizam livre de direitos
+autorais para fins não comerciais."
+vertical_alignment = 2
 
 [connection signal="mouse_entered" from="MainContainer/HBoxContainer/VBoxContainer/Play" to="." method="_on_play_mouse_entered"]
 [connection signal="pressed" from="MainContainer/HBoxContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
