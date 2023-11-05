@@ -30,14 +30,14 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -275.0
 offset_right = 275.0
-offset_bottom = 456.0
+offset_bottom = 622.0
 grow_horizontal = 2
 
 [node name="Label" type="Label" parent="MainContainer"]
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/line_spacing = 250
+theme_override_constants/line_spacing = 20
 theme_override_fonts/font = ExtResource("2_aqgb0")
 theme_override_font_sizes/font_size = 68
 text = "Opções"
@@ -56,21 +56,53 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="MainContainer/HBoxContainer/VBoxContainer"]
+[node name="MasterLabel" type="Label" parent="MainContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_aqgb0")
 theme_override_font_sizes/font_size = 33
-text = "Volume
+text = "Volume Geral
 "
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="MainContainer/HBoxContainer/VBoxContainer"]
+[node name="MasterHSlider" type="HSlider" parent="MainContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 min_value = -80.0
 max_value = 1.0
 step = 0.0
 value = -41.0
 script = ExtResource("3_cl0tl")
+
+[node name="MusicLabel" type="Label" parent="MainContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_aqgb0")
+theme_override_font_sizes/font_size = 33
+text = "Música"
+horizontal_alignment = 1
+
+[node name="MusicHSlider" type="HSlider" parent="MainContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+min_value = -80.0
+max_value = 1.0
+step = 0.0
+value = -41.0
+script = ExtResource("3_cl0tl")
+channel = "Music"
+
+[node name="SoundsLabel" type="Label" parent="MainContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_aqgb0")
+theme_override_font_sizes/font_size = 33
+text = "Efeitos Sonoros"
+horizontal_alignment = 1
+
+[node name="SoundsHSlider" type="HSlider" parent="MainContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+min_value = -80.0
+max_value = 1.0
+step = 0.0
+value = -41.0
+script = ExtResource("3_cl0tl")
+channel = "Sounds"
 
 [node name="Back" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 50)
