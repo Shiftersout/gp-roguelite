@@ -182,6 +182,7 @@ shape = SubResource("RectangleShape2D_o4eio")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_d3py6")
+bus = &"Sounds"
 
 [node name="HurtBox" type="Area2D" parent="."]
 

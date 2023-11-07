@@ -420,6 +420,7 @@ scale = Vector2(1.5, 1.5)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="WeaponNode"]
 stream = ExtResource("4_q3kgx")
+bus = &"Sounds"
 
 [node name="PlayerHitbox" parent="." instance=ExtResource("4_lot3m")]
 script = ExtResource("5_7k03u")
