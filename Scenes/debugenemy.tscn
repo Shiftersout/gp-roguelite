@@ -9,7 +9,7 @@
 [node name="debugenemy" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(439, 218)
+position = Vector2(443, 230)
 zoom = Vector2(2, 2)
 
 [node name="TileMapPCG" parent="." instance=ExtResource("2_57i02")]

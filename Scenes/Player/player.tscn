@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://bt0wbs7fi3ffm"]
+[gd_scene load_steps=20 format=3 uid="uid://bt0wbs7fi3ffm"]
 
 [ext_resource type="Script" path="res://Scripts/player/player.gd" id="1_hy678"]
 [ext_resource type="Texture2D" uid="uid://cxp1l5qvxnygf" path="res://Sprites/player/player_idle.png" id="2_0q8xq"]
 [ext_resource type="Texture2D" uid="uid://dbcx3qqrg143v" path="res://Sprites/player/player_walking.png" id="3_018mt"]
-[ext_resource type="PackedScene" uid="uid://ddhvkxs1ngaha" path="res://Scenes/Weapons/sword.tscn" id="3_ohua2"]
+[ext_resource type="PackedScene" uid="uid://djt775wvor1ym" path="res://Scenes/Weapons/dagger.tscn" id="4_6r1mj"]
+[ext_resource type="AudioStream" uid="uid://gpd380vn44k7" path="res://Audio/hurt.ogg" id="4_d3py6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k2gem"]
 atlas = ExtResource("2_0q8xq")
@@ -107,10 +108,22 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_3ap13"]
 resource_name = "take_damage"
-length = 0.4
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -118,10 +131,10 @@ tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.174533, 0.0, -0.174533, 0.0]
+"values": [0.0, 0.174533, -0.174533, 0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -130,10 +143,22 @@ tracks/1/path = NodePath("HurtBox:monitoring")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fl8u5"]
@@ -155,6 +180,9 @@ animation = &"walking"
 position = Vector2(0, 9.5)
 shape = SubResource("RectangleShape2D_o4eio")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_d3py6")
+
 [node name="HurtBox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
@@ -164,7 +192,7 @@ debug_color = Color(1, 0, 0.0823529, 0.419608)
 
 [node name="Hand" type="Node2D" parent="."]
 
-[node name="Sword" parent="Hand" instance=ExtResource("3_ohua2")]
+[node name="Dagger" parent="Hand" instance=ExtResource("4_6r1mj")]
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(30, 0)

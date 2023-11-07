@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export_group("status")
 @export var move_speed : float = 128
 @export var health_points : int = 6
+@export var coins : int = 0
 
 @onready var sprite = $AnimatedSprite2D
 @onready var hand = $Hand

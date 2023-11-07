@@ -1,10 +1,11 @@
-[gd_scene load_steps=39 format=3 uid="uid://mi0sbway6q46"]
+[gd_scene load_steps=43 format=3 uid="uid://mi0sbway6q46"]
 
 [ext_resource type="Script" path="res://Scripts/enemy/enemy.gd" id="1_3vitx"]
 [ext_resource type="Texture2D" uid="uid://bo2olbvqikxvh" path="res://Sprites/enemies/first floor/hobgoblin_run.png" id="2_ed7ah"]
 [ext_resource type="Texture2D" uid="uid://bab7gnu6qcq74" path="res://Sprites/enemies/first floor/hobgoblin_idle.png" id="3_qvl8w"]
 [ext_resource type="Texture2D" uid="uid://cr25acsxdiibv" path="res://Sprites/enemies/exclamation.png" id="4_3pxnu"]
-[ext_resource type="Texture2D" uid="uid://b88287ahok4r1" path="res://Sprites/enemies/ph_enemy_meelee.png" id="5_jjqcg"]
+[ext_resource type="AudioStream" uid="uid://c2by6b5iyeamp" path="res://Audio/hit.ogg" id="5_slek7"]
+[ext_resource type="Texture2D" uid="uid://trcxxoppiogj" path="res://Sprites/weapons/hammer_attack.png" id="6_1odkd"]
 [ext_resource type="PackedScene" uid="uid://ccgu3h3tb36j1" path="res://Scenes/Enemies/enemy_hitbox.tscn" id="6_5xwj7"]
 [ext_resource type="Script" path="res://Scripts/States/State_machine.gd" id="7_djriq"]
 [ext_resource type="Script" path="res://Scripts/States/Enemy_chase.gd" id="8_bnyfk"]
@@ -95,7 +96,10 @@ region = Rect2(6, 0, 3, 10)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jobcf"]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
 "loop": true,
 "name": &"default",
 "speed": 5.0
@@ -118,68 +122,111 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6spxd"]
 size = Vector2(13, 14)
 
+[sub_resource type="Animation" id="Animation_sa1hg"]
+resource_name = "hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2001, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.174533, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_64ph2"]
+_data = {
+"hit": SubResource("Animation_sa1hg")
+}
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ld8bu"]
 radius = 5.0
 height = 24.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ydj0q"]
-atlas = ExtResource("5_jjqcg")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ms1xv"]
+atlas = ExtResource("6_1odkd")
+region = Rect2(60, 0, 60, 60)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bn5uq"]
-atlas = ExtResource("5_jjqcg")
-region = Rect2(16, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_nd7tw"]
+atlas = ExtResource("6_1odkd")
+region = Rect2(120, 0, 60, 60)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_psxpt"]
-atlas = ExtResource("5_jjqcg")
-region = Rect2(32, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehwae"]
+atlas = ExtResource("6_1odkd")
+region = Rect2(180, 0, 60, 60)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1mwlk"]
-atlas = ExtResource("5_jjqcg")
-region = Rect2(48, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ysgu"]
+atlas = ExtResource("6_1odkd")
+region = Rect2(240, 0, 60, 60)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rp6hi"]
-atlas = ExtResource("5_jjqcg")
-region = Rect2(64, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewm8d"]
+atlas = ExtResource("6_1odkd")
+region = Rect2(300, 0, 60, 60)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_da53p"]
-atlas = ExtResource("5_jjqcg")
-region = Rect2(80, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_icrvx"]
+atlas = ExtResource("6_1odkd")
+region = Rect2(360, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxut7"]
+atlas = ExtResource("6_1odkd")
+region = Rect2(420, 0, 60, 60)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8y81m"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ydj0q")
+"texture": SubResource("AtlasTexture_ms1xv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bn5uq")
+"texture": SubResource("AtlasTexture_nd7tw")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_psxpt")
+"texture": SubResource("AtlasTexture_ehwae")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1mwlk")
+"texture": SubResource("AtlasTexture_8ysgu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rp6hi")
+"texture": SubResource("AtlasTexture_ewm8d")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_da53p")
+"texture": SubResource("AtlasTexture_icrvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxut7")
 }],
 "loop": false,
 "name": &"attack",
-"speed": 20.0
+"speed": 8.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
 "loop": false,
 "name": &"default",
 "speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jnosc"]
-radius = 7.0
-height = 20.0
+radius = 11.0
+height = 48.0
 
 [sub_resource type="Animation" id="Animation_5nht8"]
 length = 0.001
@@ -219,10 +266,34 @@ tracks/2/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../..:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../AudioStreamPlayer2D:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_hxxle"]
 resource_name = "attack"
-length = 0.4
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -230,7 +301,7 @@ tracks/0/path = NodePath("AnimatedSprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [&"attack", &"default"]
@@ -242,10 +313,10 @@ tracks/1/path = NodePath("AnimatedSprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0, 5]
+"values": [0, 6]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -266,7 +337,7 @@ tracks/3/path = NodePath("EnemyHitbox/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0.2, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -274,7 +345,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_tdvir"]
 resource_name = "warning"
-length = 0.6
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -282,7 +353,7 @@ tracks/0/path = NodePath("../../WarningSprite:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6),
+"times": PackedFloat32Array(0, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [&"warning", &"default"]
@@ -294,7 +365,7 @@ tracks/1/path = NodePath("../../WarningSprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 0]
@@ -307,10 +378,11 @@ _data = {
 "warning": SubResource("Animation_tdvir")
 }
 
-[node name="Hobgoblin" type="CharacterBody2D" groups=["enemy"]]
+[node name="Hobgoblin" type="CharacterBody2D" node_paths=PackedStringArray("animation_hit") groups=["enemy"]]
 collision_layer = 2
 script = ExtResource("1_3vitx")
-health_points = 6
+health_points = 7
+animation_hit = NodePath("AnimationPlayerHit")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1.5, -0.5)
@@ -320,7 +392,7 @@ frame = 2
 frame_progress = 0.288906
 
 [node name="WarningSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -16)
+position = Vector2(2, -20)
 sprite_frames = SubResource("SpriteFrames_jobcf")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -329,6 +401,14 @@ path_desired_distance = 4.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 6)
 shape = SubResource("RectangleShape2D_6spxd")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_slek7")
+
+[node name="AnimationPlayerHit" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_64ph2")
+}
 
 [node name="HurtBox" type="Area2D" parent="."]
 
@@ -344,11 +424,13 @@ position = Vector2(20, 0)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Attack/MeeleeAttack"]
 sprite_frames = SubResource("SpriteFrames_8y81m")
+offset = Vector2(12, -2)
 
 [node name="EnemyHitbox" parent="Attack/MeeleeAttack" instance=ExtResource("6_5xwj7")]
+damage = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack/MeeleeAttack/EnemyHitbox"]
-position = Vector2(-2, 0)
+position = Vector2(11, 0)
 shape = SubResource("CapsuleShape2D_jnosc")
 disabled = true
 debug_color = Color(0.682353, 0.501961, 0, 0.419608)
