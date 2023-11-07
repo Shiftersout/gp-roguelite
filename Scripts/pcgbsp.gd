@@ -12,24 +12,45 @@ extends TileMap
 @export var room_amount : int = 10
 ## Minimum leaf splitting factor.
 @export var min_room_factor : float = 0.4
+## Tileset ID
+@export var tileset_id : int = 2
+## Enemy scene (NEEDS CHANGE)
+@export var enemy_scene = preload("res://Scenes/Enemies/enemy.tscn")
 
-## Tiles. NOTE: Change when working with real tileset
-const GROUND = Vector2i(1, 0)
-const ROOF = Vector2i(0, 1)
-const WALL = Vector2i(1, 1)
+@export_group("Other options")
+## Generate on _ready()
+@export var auto_generate : bool = false
+
+var player : CharacterBody2D
+
+const ROOF = Vector2i(1, 0)
+var terrain_id = tileset_id-2
 
 var tree = {} ## A dictionary with the entire tree.
 var leaves = [] ## An array that has every id of every pair of leaves.
 var leaf_id = 0 ## Current leaf id.
+
 var rooms = [] ## An array containing all rooms in the map.
+var enemy_rooms = [] ## An array containing indexes to enemy rooms.
+var end_rooms = [] ## An array containing indexes to end rooms.
+var spawn_room : int ## The room in wich the player spawns.
+var item_room : int ## The room with a garanteed item.
+var npc_room : int ## The room with an NPC.
+var boss_room : int ##The boss room.
+
+var hard_rooms = [] ## An array containing the indexes of hard enemy rooms
+var normal_rooms = [] ## An array containing the indexes of normal enemy rooms
+var enemy_rooms_nodes = [] ## An array containing the nodes with enemies
 
 var path
 
 ## NOTE: change.
 func _ready():
+	player = get_tree().get_first_node_in_group("player")
 	## Working with seeds is not necessary for now.
 	randomize()
-	generate()
+	if auto_generate:
+		generate()
 
 ## Makes all steps to generating the map in order.
 func generate():
@@ -43,17 +64,23 @@ func generate():
 		rooms_c.append(i.center)
 	path = find_mst(rooms_c)
 	join_rooms()
-	add_walls()
+	
+	if set_special_rooms():
+		create_enemies()
+		spawn_player()
+	
 	
 ## Fills the entire map with roof tiles.
 func fill_roof():
 	for x in range(0, map_w):
 		for y in range(0, map_h):
-			set_cell(0, Vector2(x, y), 1, ROOF)
+			set_cell(0, Vector2(x, y), tileset_id, Vector2i(1, 0))
 	
 ## Starts/restarts the tree dictionary.
 func start_tree():
 	rooms = []
+	end_rooms = []
+	enemy_rooms = []
 	tree = {}
 	leaves = []
 	leaf_id = 0
@@ -156,12 +183,15 @@ func create_rooms():
 		rooms.append(room)
 		room_id += 1
 		
-	## Sets the cells in every room to ground. NOTE: change.
+	## Creates the rooms using the tilemap terrain function
+	var cells_array = []
 	for i in range(rooms.size()):
 		var r = rooms[i]
 		for x in range(r.x, r.x+r.w):
 			for y in range(r.y, r.y + r.h):
-				set_cell(0, Vector2i(x, y), 1, GROUND)
+				cells_array.append(Vector2i(x, y))
+				
+	set_cells_terrain_connect(0, cells_array, terrain_id, 0, true)
 
 ## Joins rooms with corridors, by connecting every leaf pair.
 func join_rooms():
@@ -191,52 +221,54 @@ func connect_rooms(center1, center2):
 	
 	var x = min(center1.x, center2.x)
 	var y = min(center1.y, center2.y)
-	var w = 2
-	var h = 2
+	var w = 4
+	var h = 4
+	
+	var cells_array = []
 	
 	##Checks if the connection is horizontal, vertical, or diagonal
 	if(center1.x == center2.x):
 		x -= floor(w/2.0)+1
 		h = abs(center1.y - center2.y)
+		
 	elif(center1.y == center2.y):
 		y -= floor(h/2.0)+1
 		w = abs(center1.x - center2.x)
+	
+	
 	else:
-		x -= floor(w/2.0)+1
-		h = abs(center1.y - center2.y)
-		x = 0 if (x < 0) else x
+		var xmin = min(center1.x, center2.x)
+		var xmax = max(center1.x, center2.x)
+		var ymin = min(center1.y, center2.y)
+		var ymax = max(center1.y, center2.y)
 		
-		var new_y = y
-		for i in range(x, x+w):
-			for j in range(y, y+h):
-				if get_cell_atlas_coords(0, Vector2i(i, j)) == ROOF:
-					set_cell(0, Vector2i(i,j), 1, GROUND)
-				new_y = j
-		h = 2
-		if get_cell_atlas_coords(0, Vector2i(x+w, new_y+1)) == GROUND:
-			new_y = y
-		else:
-			##+1 because of the path size :)))
-			new_y -=1
-		x = min(center1.x, center2.x)
-		w = abs(center1.x - center2.x)
-		for i in range(x, x+w):
-			for j in range(new_y, new_y+h):
-				if get_cell_atlas_coords(0, Vector2i(i, j)) == ROOF:
-					set_cell(0, Vector2i(i,j), 1, GROUND)
-
+		for i in range(xmin, xmax):
+			for j in range(ymin, ymin+h):
+				cells_array.append(Vector2i(i, j))
+				
+		if get_cell_atlas_coords(0, Vector2i(xmax+1, ymin)) == ROOF:
+			xmin = xmax
+			
+		if get_cell_atlas_coords(0, Vector2i(xmax+1, ymin)) == ROOF:
+			xmin = xmax
+			
+		for i in range(xmin, xmin+h):
+			for j in range(ymin, ymax):
+				cells_array.append(Vector2i(i, j))
+				
+		set_cells_terrain_connect(0, cells_array, terrain_id, 0, true)
 		add_connection(center1, center2)
-		return null
+		return
 		
 	x = 0 if (x < 0) else x
 	y = 0 if (y < 0) else y
 	
-	## Sets cells to ground. Does this if the path is vertical or horizontal.
 	for i in range(x, x+w):
 		for j in range(y, y+h):
 			if get_cell_atlas_coords(0, Vector2i(i, j)) == ROOF:
-				set_cell(0, Vector2i(i,j), 1, GROUND)
+				cells_array.append(Vector2i(i, j))
 				
+	set_cells_terrain_connect(0, cells_array, terrain_id, 0, true)
 	add_connection(center1, center2)
 
 ## Adds the connection bewteen each room so every room knows to wich other
@@ -275,36 +307,78 @@ func find_mst(room_positions):
 	
 	return path
 
-## Adds walls to paths and rooms
-func add_walls():
-	for cell in get_used_cells(0):
-		if get_cell_atlas_coords(0, cell) != GROUND: continue
-		
-		var up = Vector2i(cell.x, cell.y-1)
-		var down = Vector2i(cell.x, cell.y+1)
-		var left = Vector2i(cell.x-1, cell.y)
-		var right = Vector2i(cell.x+1, cell.y)
-		
-		var up_left = Vector2i(cell.x-1, cell.y-1)
-		var up_right = Vector2i(cell.x+1, cell.y-1)
-		var down_left = Vector2i(cell.x-1, cell.y+1)
-		var down_right = Vector2i(cell.x+1, cell.y+1)
-		
-		if get_cell_atlas_coords(0, up) == ROOF: set_cell(0, up, 1, WALL)
-		if get_cell_atlas_coords(0, down) == ROOF: set_cell(0, down, 1, WALL)
-		if get_cell_atlas_coords(0, left) == ROOF: set_cell(0, left, 1, WALL)
-		if get_cell_atlas_coords(0, right) == ROOF: set_cell(0, right, 1, WALL)
-		if get_cell_atlas_coords(0, up_left) == ROOF: set_cell(0, up_left, 1, WALL)
-		if get_cell_atlas_coords(0, up_right) == ROOF: set_cell(0, up_right, 1, WALL)
-		if get_cell_atlas_coords(0, down_left) == ROOF: set_cell(0, down_left, 1, WALL)
-		if get_cell_atlas_coords(0, down_right) == ROOF: set_cell(0, down_right, 1, WALL)
+## Sets values for spawn, boss, item and boss room.
+func set_special_rooms():
+	## find every room that has only 1 connected room
+	for i in range(0, rooms.size()):
+		if rooms[i].connected_rooms.size() == 1 && end_rooms.size() < 4:
+			end_rooms.append(i)
+		else:
+			enemy_rooms.append(i)
 	
-## Returns how many neighbours are roof tiles. No diagonals.
-func check_direct_neighbours(x, y, cell_type):
-	var count = 0
+	## Creates everything again if there isn't at least 4 end rooms
+	if end_rooms.size() < 4:
+		print_debug("Falhou! Criando de novo")
+		generate()
+		return false
 	
-	if get_cell_atlas_coords(0, Vector2i(x, y-1)) == cell_type: count+=1
-	if get_cell_atlas_coords(0, Vector2i(x, y+1)) == cell_type: count+=1
-	if get_cell_atlas_coords(0, Vector2i(x-1, y)) == cell_type: count+=1
-	if get_cell_atlas_coords(0, Vector2i(x+1, y)) == cell_type: count+=1
-	return count
+	## Shuffles the array and sets randomly the dedicated rooms
+	end_rooms.shuffle()
+	spawn_room = end_rooms[0]
+	item_room = end_rooms[1]
+	npc_room = end_rooms[2]
+	boss_room = end_rooms[3]
+	
+	return true
+
+func create_enemies():
+	enemy_rooms.shuffle()
+	var hard_rooms_amount = ceil(room_amount/3.0)
+	
+	for i in range(0, hard_rooms_amount-1):
+		if enemy_rooms[i]:
+			hard_rooms.append(enemy_rooms[i])
+	
+	for i in range(hard_rooms_amount-1, enemy_rooms.size()):
+		if enemy_rooms[i]:
+			normal_rooms.append(enemy_rooms[i])
+		
+	print_debug(enemy_rooms)
+	print_debug(hard_rooms)
+	print_debug(normal_rooms)
+	add_enemies(4, hard_rooms)
+	add_enemies(2, normal_rooms)
+	
+func add_enemies(amount : int, room_array):
+	for i in room_array:
+		var new_room = Node2D.new()
+		var new_enemies = []
+		
+		new_room.name = "room_" + str(i)
+		new_room.position = Vector2(rooms[i].x*16, rooms[i].y*16)
+		add_child(new_room)
+		enemy_rooms_nodes.append(new_room)
+		
+		for o in range(0, amount):
+			new_enemies.append(enemy_scene.instantiate())
+			new_room.add_child(new_enemies[o])
+			
+		for o in new_room.get_children():
+			var random_x = randi_range(32, (rooms[i].w * 16) - 32)
+			var random_y = randi_range(32, (rooms[i].h * 16) - 32)
+			o.position = Vector2(random_x, random_y)
+			
+			o.room_top_left = Vector2(rooms[i].x+2, rooms[i].y+2)
+			o.room_size = Vector2(rooms[i].w-4, rooms[i].h-4)
+			o.room_index = i
+
+func spawn_player():
+	player.position = Vector2(rooms[spawn_room].center.x*16, rooms[spawn_room].center.y*16)
+	
+#func _draw():
+#	draw_set_transform(Vector2(0, 0))
+#	for i in hard_rooms:
+#		draw_rect(Rect2((rooms[i].x+2)*16, (rooms[i].y+2)*16, (rooms[i].w-4)*16, (rooms[i].h-4)*16), Color.RED, false)
+#		
+#	for i in normal_rooms:
+#		draw_rect(Rect2((rooms[i].x+2)*16, (rooms[i].y+2)*16, (rooms[i].w-4)*16, (rooms[i].h-4)*16), Color.RED, false)

@@ -4,7 +4,7 @@ extends Control
 	#MusicController.play_music()
 	
 func _on_play_pressed():
-	get_tree().change_scene_to_file("res://Scenes/main_scene.tscn")
+	get_tree().change_scene_to_file("res://Scenes/debugenemy.tscn")
 
 func _on_credits_pressed():
 	get_tree().change_scene_to_file("res://Scenes/credits.tscn")

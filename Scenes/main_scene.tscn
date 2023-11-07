@@ -6,11 +6,12 @@
 [node name="MainScene" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_tjw47")]
+position = Vector2(-127, -3)
 
 [node name="TileMapPCG" parent="." instance=ExtResource("2_vawyb")]
-process_mode = 4
 cell_quadrant_size = 32
 map_w = 110
 map_h = 110
 min_room_size = 16
 min_room_factor = 0.5
+auto_generate = true
