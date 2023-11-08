@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgnokk8ibq1hs"]
+[gd_scene load_steps=6 format=3 uid="uid://bgnokk8ibq1hs"]
 
 [ext_resource type="PackedScene" uid="uid://bt0wbs7fi3ffm" path="res://Scenes/Player/player.tscn" id="1_tjw47"]
 [ext_resource type="PackedScene" uid="uid://bw67e8mrqn5vd" path="res://Scenes/tile_map_pcg.tscn" id="2_vawyb"]
+[ext_resource type="PackedScene" uid="uid://18v1vrksmqug" path="res://Scenes/Enemies/first floor/m_goblin.tscn" id="3_yd28l"]
+[ext_resource type="PackedScene" uid="uid://bxdolqcnms1e4" path="res://Scenes/Enemies/first floor/f_goblin.tscn" id="4_gson5"]
+[ext_resource type="PackedScene" uid="uid://mi0sbway6q46" path="res://Scenes/Enemies/first floor/hobgoblin.tscn" id="5_s856g"]
 
 [node name="MainScene" type="Node2D"]
 
@@ -15,3 +18,6 @@ map_h = 110
 min_room_size = 16
 min_room_factor = 0.5
 auto_generate = true
+enemy1 = ExtResource("3_yd28l")
+enemy2 = ExtResource("4_gson5")
+hard_enemy = ExtResource("5_s856g")

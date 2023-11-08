@@ -14,12 +14,14 @@ extends TileMap
 @export var min_room_factor : float = 0.4
 ## Tileset ID
 @export var tileset_id : int = 2
-## Enemy scene (NEEDS CHANGE)
-@export var enemy_scene = preload("res://Scenes/Enemies/enemy.tscn")
 
 @export_group("Other options")
 ## Generate on _ready()
 @export var auto_generate : bool = false
+## enemy scenes
+@export var enemy1 : Resource
+@export var enemy2 : Resource
+@export var hard_enemy : Resource
 
 var player : CharacterBody2D
 
@@ -44,9 +46,15 @@ var enemy_rooms_nodes = [] ## An array containing the nodes with enemies
 
 var path
 
+var enemy_scenes = [] ##An array containing the enemy scenes
+
 ## NOTE: change.
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
+	enemy_scenes.append(enemy1)
+	enemy_scenes.append(enemy2)
+	enemy_scenes.append(hard_enemy)
+	
 	## Working with seeds is not necessary for now.
 	randomize()
 	if auto_generate:
@@ -347,7 +355,7 @@ func create_enemies():
 	print_debug(hard_rooms)
 	print_debug(normal_rooms)
 	add_enemies(4, hard_rooms)
-	add_enemies(2, normal_rooms)
+	add_enemies(3, normal_rooms)
 	
 func add_enemies(amount : int, room_array):
 	for i in room_array:
@@ -359,9 +367,22 @@ func add_enemies(amount : int, room_array):
 		add_child(new_room)
 		enemy_rooms_nodes.append(new_room)
 		
-		for o in range(0, amount):
-			new_enemies.append(enemy_scene.instantiate())
-			new_room.add_child(new_enemies[o])
+		if amount < 4:
+			for o in range(0, amount):
+				new_enemies.append(enemy_scenes[randi_range(0, 1)].instantiate())
+				new_room.add_child(new_enemies[o])
+				
+		else:
+			var o = 0
+			while o < 4:
+				new_enemies.append(enemy_scenes[randi_range(0, 1)].instantiate())
+				new_room.add_child(new_enemies[o])
+				o+=1
+			
+			while o <= amount:
+				new_enemies.append(enemy_scenes[2].instantiate())
+				new_room.add_child(new_enemies[o])
+				o+=1
 			
 		for o in new_room.get_children():
 			var random_x = randi_range(32, (rooms[i].w * 16) - 32)
