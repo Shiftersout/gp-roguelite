@@ -106,7 +106,6 @@ de Americana (Fatec Americana). Seus autores o disponibilizam livre de direitos
 autorais para fins não comerciais."
 vertical_alignment = 2
 
-[connection signal="mouse_entered" from="MainContainer/HBoxContainer/VBoxContainer/Play" to="." method="_on_play_mouse_entered"]
 [connection signal="pressed" from="MainContainer/HBoxContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MainContainer/HBoxContainer/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="MainContainer/HBoxContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]

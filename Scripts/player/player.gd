@@ -9,6 +9,7 @@ extends CharacterBody2D
 @onready var hand = $Hand
 @onready var raycast = $RayCast2D
 @onready var animation = $AnimationPlayer
+@onready var camera = $Camera2D
 
 var h_direction = 1
 var weapon : Node2D
@@ -17,6 +18,9 @@ var weapon_animation : AnimationPlayer
 var weapon_particles : GPUParticles2D
 
 func _ready():
+	var map = get_tree().get_first_node_in_group("tilemap")
+	camera.limit_bottom = (map.map_h*16)
+	camera.limit_right = (map.map_w*16)
 	change_weapon()
 
 func _physics_process(_delta):

@@ -50,6 +50,7 @@ var enemy_scenes = [] ##An array containing the enemy scenes
 
 ## NOTE: change.
 func _ready():
+	global_position = Vector2.ZERO
 	player = get_tree().get_first_node_in_group("player")
 	enemy_scenes.append(enemy1)
 	enemy_scenes.append(enemy2)
@@ -374,12 +375,12 @@ func add_enemies(amount : int, room_array):
 				
 		else:
 			var o = 0
-			while o < 4:
+			while o < 3:
 				new_enemies.append(enemy_scenes[randi_range(0, 1)].instantiate())
 				new_room.add_child(new_enemies[o])
 				o+=1
 			
-			while o <= amount:
+			while o <= amount-1:
 				new_enemies.append(enemy_scenes[2].instantiate())
 				new_room.add_child(new_enemies[o])
 				o+=1

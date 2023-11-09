@@ -1,14 +1,30 @@
 [gd_scene load_steps=22 format=3 uid="uid://c0mr8ealumylf"]
 
-[ext_resource type="Shader" path="res://Scenes/Player/white.gdshader" id="1_ugsrg"]
 [ext_resource type="PackedScene" uid="uid://bjh51cg126ool" path="res://Scenes/Player/default_particles.tscn" id="2_3rsrc"]
 [ext_resource type="Texture2D" uid="uid://e2qafe3r15lo" path="res://Sprites/weapons/sword_attack.png" id="2_l7l47"]
 [ext_resource type="PackedScene" uid="uid://clfyydw860c1r" path="res://Scenes/Player/player_hitbox.tscn" id="3_7uq0x"]
 [ext_resource type="Script" path="res://Scripts/player/player_hitbox.gd" id="4_276jc"]
 [ext_resource type="AudioStream" uid="uid://djryp15qmy087" path="res://Audio/sword.ogg" id="4_rvkxb"]
 
+[sub_resource type="Shader" id="Shader_4q4j6"]
+code = "shader_type canvas_item;
+
+uniform bool active = false;
+
+void fragment() {
+	vec4 previous_color = texture(TEXTURE, UV);
+	vec4 white_color = vec4(1.0, 1.0, 1.0, previous_color.a);
+	vec4 new_color = previous_color;
+	if (active == true)
+	{
+		new_color = white_color;
+	}
+	COLOR = new_color;
+}
+"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mcpan"]
-shader = ExtResource("1_ugsrg")
+shader = SubResource("Shader_4q4j6")
 shader_parameter/active = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ycvem"]

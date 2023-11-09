@@ -7,7 +7,6 @@ extends State
 
 func Enter():
 	#on entering state, play warning animation
-	print_debug("Attack")
 	animation.play("warning")
 
 #changes animation to attack if warning finished or change state to chase when attack ends

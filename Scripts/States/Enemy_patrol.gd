@@ -21,7 +21,6 @@ func _ready():
 	
 func Enter():
 	#upon entering, randomizes a coordinate in the room to walk to
-	#print_debug("Patrol")
 	sprite.play("chase")
 	room_top_left = enemy.room_top_left
 	room_size = enemy.room_size

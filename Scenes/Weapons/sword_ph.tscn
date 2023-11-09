@@ -1,13 +1,29 @@
 [gd_scene load_steps=20 format=3 uid="uid://ddhvkxs1ngaha"]
 
-[ext_resource type="Shader" path="res://Scenes/Player/white.gdshader" id="1_48fkb"]
 [ext_resource type="Texture2D" uid="uid://cpsllce2168d1" path="res://Sprites/weapons/ph_sword.png" id="2_055fp"]
 [ext_resource type="PackedScene" uid="uid://bjh51cg126ool" path="res://Scenes/Player/default_particles.tscn" id="3_gf7gw"]
 [ext_resource type="PackedScene" uid="uid://clfyydw860c1r" path="res://Scenes/Player/player_hitbox.tscn" id="4_1tkqf"]
 [ext_resource type="Script" path="res://Scripts/player/player_hitbox.gd" id="5_ftvya"]
 
+[sub_resource type="Shader" id="Shader_4q4j6"]
+code = "shader_type canvas_item;
+
+uniform bool active = false;
+
+void fragment() {
+	vec4 previous_color = texture(TEXTURE, UV);
+	vec4 white_color = vec4(1.0, 1.0, 1.0, previous_color.a);
+	vec4 new_color = previous_color;
+	if (active == true)
+	{
+		new_color = white_color;
+	}
+	COLOR = new_color;
+}
+"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mcpan"]
-shader = ExtResource("1_48fkb")
+shader = SubResource("Shader_4q4j6")
 shader_parameter/active = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xxo2t"]

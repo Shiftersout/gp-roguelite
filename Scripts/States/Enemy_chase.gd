@@ -18,7 +18,6 @@ func _ready():
 
 func Enter():
 	#set target and distance upon entering state
-	print_debug("Chase")
 	sprite.play("chase")
 	navigation.target_desired_distance = 32.0
 	navigation.target_position = player.global_position

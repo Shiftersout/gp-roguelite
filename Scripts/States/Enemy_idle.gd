@@ -15,7 +15,6 @@ var player : CharacterBody2D
 func Enter():
 	#upon entering, starts a timer
 	timer = Timer.new()
-	#print_debug("Idle")
 	player = get_tree().get_first_node_in_group("player")
 	sprite.play("idle")
 	add_child(timer)
