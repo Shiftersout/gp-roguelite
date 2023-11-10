@@ -1,7 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://77pljnuk3rse"]
+[gd_scene load_steps=9 format=3 uid="uid://77pljnuk3rse"]
 
 [ext_resource type="Shader" path="res://Shaders/shine.gdshader" id="1_5iunl"]
+[ext_resource type="Shader" path="res://Shaders/outline.gdshader" id="1_jcwos"]
 [ext_resource type="Texture2D" uid="uid://caj000muk0eha" path="res://Sprites/itens/sword_item.png" id="1_w5fr3"]
+[ext_resource type="Script" path="res://Scripts/item.gd" id="2_eyxva"]
+[ext_resource type="PackedScene" uid="uid://c0mr8ealumylf" path="res://Scenes/Weapons/sword.tscn" id="3_fal2o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_caujb"]
+shader = ExtResource("1_jcwos")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ogdn2"]
 shader = ExtResource("1_5iunl")
@@ -12,12 +23,16 @@ shader_parameter/shine_size = 0.01
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gtl6q"]
 
 [node name="sword_item" type="Node2D"]
+material = SubResource("ShaderMaterial_caujb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ogdn2")
 texture = ExtResource("1_w5fr3")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("sprite") groups=["interactible", "item"]]
+script = ExtResource("2_eyxva")
+weapon_scene = ExtResource("3_fal2o")
+sprite = NodePath("../Sprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_gtl6q")

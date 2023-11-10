@@ -17,18 +17,23 @@ var current_weapon = 0
 var weapon_animation : AnimationPlayer
 var weapon_particles : GPUParticles2D
 
+var current_interactible
+
 func _ready():
 	var map = get_tree().get_first_node_in_group("tilemap")
 	camera.limit_bottom = (map.map_h*16)
 	camera.limit_right = (map.map_w*16)
-	change_weapon()
+	
+	weapon = hand.get_child(current_weapon)
+	weapon_animation = weapon.get_node("AnimationPlayer")
+	weapon_particles = weapon.get_node("WeaponNode/GPUParticles2D")
 
 func _physics_process(_delta):
 	move()
 	flipSprite()
 	rotateWeapon()
 	attack()
-	
+	cast_ray()
 	move_and_slide()
 
 ## Handles basic character movement
@@ -76,11 +81,56 @@ func take_damage(damage):
 	if health_points <= 0:
 		print_debug("GAME OVER!")
 	
+	
+func _input(event):
+	if event.is_action_pressed("change_weapon"):
+		current_weapon+=1
+		if current_weapon > 1: current_weapon = 0
+		change_weapon()
+	
+	if event.is_action_pressed("interact") and raycast.is_colliding():
+		current_interactible = raycast.get_collider()
+		if current_interactible .is_in_group("interactible"):
+			current_interactible.on_interact(self)
+			
+func cast_ray():
+	if raycast.is_colliding():
+		current_interactible = raycast.get_collider()
+		if current_interactible:
+			if current_interactible.is_in_group("interactible"):
+				current_interactible .on_inspection()
+	else:
+		if current_interactible and current_interactible.is_in_group("interactible"):
+			current_interactible.on_stop_inspection()
+		current_interactible = null
+	
+	
+func trade_weapon(scene):
+	if hand.get_child_count() < 2:
+		hand.add_child(scene.instantiate())
+		current_weapon = 1
+		change_weapon()
+	else:
+		hand.get_child(current_weapon).queue_free()
+		hand.add_child(scene.instantiate())
+		current_weapon = 1
+		weapon = hand.get_child(current_weapon)
+		weapon_animation = weapon.get_node("AnimationPlayer")
+		weapon_particles = weapon.get_node("WeaponNode/GPUParticles2D")
+
 ## Changes the weapon to current selected
 func change_weapon():
+	if hand.get_child_count() < 2:
+		return false
+		
+	weapon.process_mode = Node.PROCESS_MODE_DISABLED
+	weapon.visible = false
 	weapon = hand.get_child(current_weapon)
+	weapon.process_mode = Node.PROCESS_MODE_INHERIT
+	weapon.visible = true
 	weapon_animation = weapon.get_node("AnimationPlayer")
 	weapon_particles = weapon.get_node("WeaponNode/GPUParticles2D")
+	return true
 
 ## Take damage if hit by enemy 
 func _on_hurt_box_area_entered(area):

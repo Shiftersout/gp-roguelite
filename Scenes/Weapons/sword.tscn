@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://c0mr8ealumylf"]
 
-[ext_resource type="PackedScene" uid="uid://bjh51cg126ool" path="res://Scenes/Player/default_particles.tscn" id="2_3rsrc"]
+[ext_resource type="PackedScene" path="res://Scenes/Player/default_particles.tscn" id="2_3rsrc"]
 [ext_resource type="Texture2D" uid="uid://e2qafe3r15lo" path="res://Sprites/weapons/sword_attack.png" id="2_l7l47"]
 [ext_resource type="PackedScene" uid="uid://clfyydw860c1r" path="res://Scenes/Player/player_hitbox.tscn" id="3_7uq0x"]
 [ext_resource type="Script" path="res://Scripts/player/player_hitbox.gd" id="4_276jc"]
