@@ -10,4 +10,4 @@ func _ready():
 	sounds_slider.value = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Sounds"))
 	
 func _on_back_pressed():
-	get_tree().change_scene_to_file("res://Scenes/menu.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Menus/menu.tscn")
