@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c45o3s6qm7qg8"]
+[gd_scene load_steps=9 format=3 uid="uid://c45o3s6qm7qg8"]
 
 [ext_resource type="PackedScene" uid="uid://bw67e8mrqn5vd" path="res://Scenes/tile_map_pcg.tscn" id="2_57i02"]
 [ext_resource type="PackedScene" uid="uid://bt0wbs7fi3ffm" path="res://Scenes/Player/player.tscn" id="3_bvah5"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://18v1vrksmqug" path="res://Scenes/Enemies/first floor/m_goblin.tscn" id="4_nc2aw"]
 [ext_resource type="PackedScene" uid="uid://mi0sbway6q46" path="res://Scenes/Enemies/first floor/hobgoblin.tscn" id="5_iovfu"]
 [ext_resource type="PackedScene" uid="uid://77pljnuk3rse" path="res://Scenes/Itens/sword_item.tscn" id="6_ny50x"]
+[ext_resource type="PackedScene" uid="uid://br1ucxlr16na8" path="res://Scenes/Itens/hammer_item.tscn" id="7_gu68g"]
+[ext_resource type="PackedScene" uid="uid://c5d5c3v43y3yr" path="res://Scenes/Itens/dagger_item.tscn" id="8_tmr2u"]
 
 [node name="debugenemy" type="Node2D"]
 
@@ -34,11 +36,15 @@ room_top_left = Vector2(15, 9)
 room_size = Vector2(23, 11)
 
 [node name="Hobgoblin" parent="." instance=ExtResource("5_iovfu")]
-process_mode = 4
-visible = false
 position = Vector2(400, 161)
 room_top_left = Vector2(15, 9)
 room_size = Vector2(23, 11)
 
 [node name="sword_item" parent="." instance=ExtResource("6_ny50x")]
 position = Vector2(532, 210)
+
+[node name="hammer_item" parent="." instance=ExtResource("7_gu68g")]
+position = Vector2(450, 205)
+
+[node name="dagger_item" parent="." instance=ExtResource("8_tmr2u")]
+position = Vector2(471, 258)

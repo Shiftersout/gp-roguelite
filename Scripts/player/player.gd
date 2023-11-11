@@ -105,16 +105,19 @@ func cast_ray():
 		current_interactible = null
 	
 	
-func trade_weapon(scene):
+func trade_weapon(scene, damage):
 	if hand.get_child_count() < 2:
 		hand.add_child(scene.instantiate())
 		current_weapon = 1
 		change_weapon()
 	else:
-		hand.get_child(current_weapon).queue_free()
+		var previous_weapon = hand.get_child(current_weapon)
+		previous_weapon.queue_free()
+		await previous_weapon.tree_exited
 		hand.add_child(scene.instantiate())
 		current_weapon = 1
 		weapon = hand.get_child(current_weapon)
+		weapon.get_child(1).damage = damage
 		weapon_animation = weapon.get_node("AnimationPlayer")
 		weapon_particles = weapon.get_node("WeaponNode/GPUParticles2D")
 

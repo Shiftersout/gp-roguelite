@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://br1ucxlr16na8"]
+
+[ext_resource type="Shader" path="res://Shaders/outline.gdshader" id="1_3bh3e"]
+[ext_resource type="Shader" path="res://Shaders/shine.gdshader" id="2_bh7wd"]
+[ext_resource type="Texture2D" uid="uid://ddcqxewn6te3y" path="res://Sprites/itens/hammer_item.png" id="3_730df"]
+[ext_resource type="Script" path="res://Scripts/item.gd" id="4_xll5g"]
+[ext_resource type="PackedScene" uid="uid://b3iqbkdgbttva" path="res://Scenes/Weapons/hammer.tscn" id="5_yfmop"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_caujb"]
+shader = ExtResource("1_3bh3e")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ogdn2"]
+shader = ExtResource("2_bh7wd")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/shine_speed = 4.0
+shader_parameter/shine_size = 0.01
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gtl6q"]
+
+[node name="hammer_item" type="Node2D"]
+material = SubResource("ShaderMaterial_caujb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ogdn2")
+texture = ExtResource("3_730df")
+
+[node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("sprite") groups=["interactible", "item"]]
+script = ExtResource("4_xll5g")
+weapon_scene = ExtResource("5_yfmop")
+sprite = NodePath("../Sprite2D")
+damage = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_gtl6q")
+debug_color = Color(0.756863, 0.631373, 0.294118, 0.196078)
