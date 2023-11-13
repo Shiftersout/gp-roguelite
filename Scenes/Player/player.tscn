@@ -195,12 +195,10 @@ debug_color = Color(1, 0, 0.0823529, 0.419608)
 [node name="Hand" type="Node2D" parent="."]
 
 [node name="Hammer" parent="Hand" instance=ExtResource("5_sis28")]
-script = null
 
 [node name="Dagger" parent="Hand" instance=ExtResource("6_eubf4")]
 process_mode = 4
 visible = false
-script = null
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(30, 0)

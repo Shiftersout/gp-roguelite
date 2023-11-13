@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://3oh63toaklkg"]
+
+[ext_resource type="Texture2D" uid="uid://drn5whtdah5jy" path="res://Sprites/npcs/rat_idle.png" id="1_firn8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mhap"]
+atlas = ExtResource("1_firn8")
+region = Rect2(0, 0, 23, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_va7t5"]
+atlas = ExtResource("1_firn8")
+region = Rect2(23, 0, 23, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2t767"]
+atlas = ExtResource("1_firn8")
+region = Rect2(46, 0, 23, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_672wf"]
+atlas = ExtResource("1_firn8")
+region = Rect2(69, 0, 23, 23)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i5nl7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mhap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_va7t5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2t767")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_672wf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_knk27"]
+size = Vector2(14, 9)
+
+[node name="Rat" type="StaticBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_i5nl7")
+autoplay = "default"
+frame = 2
+frame_progress = 0.421315
+offset = Vector2(0.5, -0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 6.5)
+shape = SubResource("RectangleShape2D_knk27")

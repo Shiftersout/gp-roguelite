@@ -433,7 +433,7 @@ _data = {
 [node name="FemaleGobin" type="CharacterBody2D" node_paths=PackedStringArray("animation_hit") groups=["enemy"]]
 collision_layer = 2
 script = ExtResource("1_np4ug")
-health_points = 4
+health_points = 5
 animation_hit = NodePath("AnimationPlayerHit")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]

@@ -22,6 +22,7 @@ extends TileMap
 @export var enemy1 : Resource
 @export var enemy2 : Resource
 @export var hard_enemy : Resource
+@export var npc : Resource
 
 var player : CharacterBody2D
 
@@ -47,9 +48,14 @@ var enemy_rooms_nodes = [] ## An array containing the nodes with enemies
 var path
 
 var enemy_scenes = [] ##An array containing the enemy scenes
+var item_scenes = []
 
 ## NOTE: change.
 func _ready():
+	item_scenes.append(load("res://Scenes/Itens/dagger_item.tscn"))
+	item_scenes.append(load("res://Scenes/Itens/sword_item.tscn"))
+	item_scenes.append(load("res://Scenes/Itens/hammer_item.tscn"))
+	
 	global_position = Vector2.ZERO
 	player = get_tree().get_first_node_in_group("player")
 	enemy_scenes.append(enemy1)
@@ -77,6 +83,8 @@ func generate():
 	if set_special_rooms():
 		create_enemies()
 		spawn_player()
+		spawn_npc()
+		spawn_item()
 	
 	
 ## Fills the entire map with roof tiles.
@@ -361,6 +369,7 @@ func create_enemies():
 func add_enemies(amount : int, room_array):
 	for i in room_array:
 		var new_room = Node2D.new()
+		new_room.y_sort_enabled = true
 		var new_enemies = []
 		
 		new_room.name = "room_" + str(i)
@@ -397,10 +406,12 @@ func add_enemies(amount : int, room_array):
 func spawn_player():
 	player.position = Vector2(rooms[spawn_room].center.x*16, rooms[spawn_room].center.y*16)
 	
-#func _draw():
-#	draw_set_transform(Vector2(0, 0))
-#	for i in hard_rooms:
-#		draw_rect(Rect2((rooms[i].x+2)*16, (rooms[i].y+2)*16, (rooms[i].w-4)*16, (rooms[i].h-4)*16), Color.RED, false)
-#		
-#	for i in normal_rooms:
-#		draw_rect(Rect2((rooms[i].x+2)*16, (rooms[i].y+2)*16, (rooms[i].w-4)*16, (rooms[i].h-4)*16), Color.RED, false)
+func spawn_npc():
+	var npc_instance = npc.instantiate()
+	npc_instance.global_position = Vector2(rooms[npc_room].center.x*16, rooms[npc_room].center.y*16)
+	add_child(npc_instance)
+
+func spawn_item():
+	var item_instance = item_scenes[randi_range(0, item_scenes.size()-1)].instantiate()
+	item_instance.global_position = Vector2(rooms[item_room].center.x*16, rooms[item_room].center.y*16)
+	add_child(item_instance)

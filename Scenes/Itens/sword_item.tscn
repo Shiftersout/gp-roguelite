@@ -33,6 +33,7 @@ texture = ExtResource("1_w5fr3")
 script = ExtResource("2_eyxva")
 weapon_scene = ExtResource("3_fal2o")
 sprite = NodePath("../Sprite2D")
+damage = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_gtl6q")

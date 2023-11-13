@@ -433,7 +433,7 @@ _data = {
 [node name="MaleGoblin" type="CharacterBody2D" node_paths=PackedStringArray("animation_hit") groups=["enemy"]]
 collision_layer = 2
 script = ExtResource("1_g5vfk")
-health_points = 5
+health_points = 6
 animation_hit = NodePath("AnimationPlayerHit")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]

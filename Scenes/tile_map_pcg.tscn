@@ -527,6 +527,7 @@ sources/1 = SubResource("TileSetAtlasSource_1gry7")
 sources/2 = SubResource("TileSetAtlasSource_0amej")
 
 [node name="TileMapPCG" type="TileMap" groups=["tilemap"]]
+y_sort_enabled = true
 tile_set = SubResource("TileSet_mwnux")
 format = 2
 layer_0/z_index = -1
