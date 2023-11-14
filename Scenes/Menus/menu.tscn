@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmrggdtmeef5w"]
+[gd_scene load_steps=6 format=3 uid="uid://cmrggdtmeef5w"]
 
 [ext_resource type="Script" path="res://Scripts/menu.gd" id="1_84dkl"]
+[ext_resource type="Texture2D" uid="uid://c4qhxgk77p43d" path="res://Images/menu_art.png" id="2_klruq"]
 [ext_resource type="FontFile" uid="uid://c0s3dqn0rih02" path="res://Font/VT323-Regular.ttf" id="3_0x0ln"]
+[ext_resource type="Texture2D" uid="uid://mcqd6b4bfnp3" path="res://Images/logomarca fatec.png" id="3_hlsru"]
+[ext_resource type="Texture2D" uid="uid://cmliq5srgl8xn" path="res://Images/texto.png" id="3_r7xdp"]
 
 [node name="menu" type="Control"]
 layout_mode = 3
@@ -12,14 +15,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_84dkl")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="TextureRect2" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.372549, 0.247059, 0.415686, 1)
+texture = ExtResource("2_klruq")
 
 [node name="MainContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(550, 0)
@@ -29,15 +32,12 @@ anchor_bottom = 1.0
 offset_left = 50.0
 offset_right = 600.0
 grow_vertical = 2
+theme_override_constants/separation = 40
+alignment = 1
 
-[node name="Label" type="Label" parent="MainContainer"]
-custom_minimum_size = Vector2(0, 250)
+[node name="TextureRect" type="TextureRect" parent="MainContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_0x0ln")
-theme_override_font_sizes/font_size = 48
-text = "The Lost Preservatorium
-"
-vertical_alignment = 1
+texture = ExtResource("3_r7xdp")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainContainer"]
 layout_direction = 1
@@ -94,10 +94,10 @@ alignment = 0
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 516.0
-offset_right = 682.0
-offset_bottom = 620.0
+offset_left = 47.0
+offset_top = 582.0
+offset_right = 679.0
+offset_bottom = 686.0
 theme_override_fonts/font = ExtResource("3_0x0ln")
 theme_override_font_sizes/font_size = 20
 text = "Este jogo foi desenvolvido como parte das exigências para a
@@ -105,6 +105,14 @@ obtenção do título de Tecnólogo em Jogos Digitais pela Faculdade de Tecnolog
 de Americana (Fatec Americana). Seus autores o disponibilizam livre de direitos
 autorais para fins não comerciais."
 vertical_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1079.0
+offset_top = 616.0
+offset_right = 1217.0
+offset_bottom = 703.0
+texture = ExtResource("3_hlsru")
 
 [connection signal="pressed" from="MainContainer/HBoxContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MainContainer/HBoxContainer/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
