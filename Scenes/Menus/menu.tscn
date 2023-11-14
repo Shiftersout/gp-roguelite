@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmrggdtmeef5w"]
+[gd_scene load_steps=8 format=3 uid="uid://cmrggdtmeef5w"]
 
 [ext_resource type="Script" path="res://Scripts/menu.gd" id="1_84dkl"]
 [ext_resource type="Texture2D" uid="uid://c4qhxgk77p43d" path="res://Images/menu_art.png" id="2_klruq"]
 [ext_resource type="FontFile" uid="uid://c0s3dqn0rih02" path="res://Font/VT323-Regular.ttf" id="3_0x0ln"]
 [ext_resource type="Texture2D" uid="uid://mcqd6b4bfnp3" path="res://Images/logomarca fatec.png" id="3_hlsru"]
 [ext_resource type="Texture2D" uid="uid://cmliq5srgl8xn" path="res://Images/texto.png" id="3_r7xdp"]
+[ext_resource type="Theme" uid="uid://b3hj6ra2wa0rm" path="res://Texture/button_theme.tres" id="4_wm55m"]
+[ext_resource type="Texture2D" uid="uid://cotjx57orw7cp" path="res://Sprites/ui/Logo_tamandua_bailarino_cor_texto.png" id="7_pqmt6"]
 
 [node name="menu" type="Control"]
 layout_mode = 3
@@ -58,39 +60,39 @@ layout_mode = 2
 size_flags_horizontal = 0
 auto_translate = false
 localize_numeral_system = false
+theme = ExtResource("4_wm55m")
 theme_override_fonts/font = ExtResource("3_0x0ln")
 theme_override_font_sizes/font_size = 33
 text = "Jogar"
-alignment = 0
 
 [node name="Credits" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["button"]]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 0
+theme = ExtResource("4_wm55m")
 theme_override_fonts/font = ExtResource("3_0x0ln")
 theme_override_font_sizes/font_size = 33
 text = "Créditos"
-alignment = 0
 
 [node name="Options" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["button"]]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 0
+theme = ExtResource("4_wm55m")
 theme_override_fonts/font = ExtResource("3_0x0ln")
 theme_override_font_sizes/font_size = 33
 text = "Configurções"
-alignment = 0
 
 [node name="Quit" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["button"]]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_stretch_ratio = 0.6
+theme = ExtResource("4_wm55m")
 theme_override_fonts/font = ExtResource("3_0x0ln")
 theme_override_font_sizes/font_size = 33
 text = "Sair
 "
-alignment = 0
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
@@ -98,6 +100,8 @@ offset_left = 47.0
 offset_top = 582.0
 offset_right = 679.0
 offset_bottom = 686.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("3_0x0ln")
 theme_override_font_sizes/font_size = 20
 text = "Este jogo foi desenvolvido como parte das exigências para a
@@ -113,6 +117,15 @@ offset_top = 616.0
 offset_right = 1217.0
 offset_bottom = 703.0
 texture = ExtResource("3_hlsru")
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 926.0
+offset_top = 589.0
+offset_right = 1057.0
+offset_bottom = 720.0
+texture = ExtResource("7_pqmt6")
+expand_mode = 1
 
 [connection signal="pressed" from="MainContainer/HBoxContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MainContainer/HBoxContainer/VBoxContainer/Credits" to="." method="_on_credits_pressed"]

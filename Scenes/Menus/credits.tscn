@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://c76i7spjdat2s"]
+[gd_scene load_steps=5 format=3 uid="uid://c76i7spjdat2s"]
 
 [ext_resource type="Script" path="res://Scripts/credits.gd" id="1_q2ehg"]
+[ext_resource type="Texture2D" uid="uid://c4qhxgk77p43d" path="res://Images/menu_art.png" id="2_ei0s5"]
 [ext_resource type="FontFile" uid="uid://c0s3dqn0rih02" path="res://Font/VT323-Regular.ttf" id="2_iunmu"]
+[ext_resource type="Theme" uid="uid://b3hj6ra2wa0rm" path="res://Texture/button_theme.tres" id="3_6cppg"]
 
 [node name="credits" type="Control"]
 layout_mode = 3
@@ -12,14 +14,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q2ehg")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="TextureRect2" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.372549, 0.247059, 0.415686, 1)
+texture = ExtResource("2_ei0s5")
 
 [node name="MainContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(550, 0)
@@ -37,6 +39,9 @@ custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("2_iunmu")
 theme_override_font_sizes/font_size = 68
 text = "Grupo Tamanduá Bailarino"
@@ -44,6 +49,9 @@ vertical_alignment = 1
 
 [node name="Filipe" type="Label" parent="MainContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("2_iunmu")
 theme_override_font_sizes/font_size = 33
 text = "Filipe Gonçalves de Oliveira - 0040962113031
@@ -52,6 +60,9 @@ horizontal_alignment = 1
 
 [node name="Gustavo" type="Label" parent="MainContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("2_iunmu")
 theme_override_font_sizes/font_size = 33
 text = "Gustavo Ferrari Baratela - 0040962113028"
@@ -59,6 +70,9 @@ horizontal_alignment = 1
 
 [node name="Matheus" type="Label" parent="MainContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("2_iunmu")
 theme_override_font_sizes/font_size = 33
 text = "Matheus Felipe Macedo Bezerra - 0040962113021
@@ -67,6 +81,9 @@ horizontal_alignment = 1
 
 [node name="Raphel" type="Label" parent="MainContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
 theme_override_constants/line_spacing = 50
 theme_override_fonts/font = ExtResource("2_iunmu")
 theme_override_font_sizes/font_size = 33
@@ -75,6 +92,9 @@ horizontal_alignment = 1
 
 [node name="SubTitle" type="Label" parent="MainContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
 theme_override_constants/line_spacing = 25
 theme_override_fonts/font = ExtResource("2_iunmu")
 theme_override_font_sizes/font_size = 43
@@ -83,6 +103,10 @@ horizontal_alignment = 1
 
 [node name="Cleberson" type="Label" parent="MainContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 0
 theme_override_constants/line_spacing = 50
 theme_override_fonts/font = ExtResource("2_iunmu")
 theme_override_font_sizes/font_size = 33
@@ -90,9 +114,10 @@ text = "Cleberson Eugenio Forte"
 horizontal_alignment = 1
 
 [node name="Back" type="Button" parent="MainContainer"]
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("3_6cppg")
 theme_override_fonts/font = ExtResource("2_iunmu")
 theme_override_font_sizes/font_size = 33
 text = "Voltar

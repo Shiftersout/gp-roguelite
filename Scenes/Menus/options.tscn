@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dct2gmywgcv5k"]
+[gd_scene load_steps=8 format=3 uid="uid://dct2gmywgcv5k"]
 
 [ext_resource type="Script" path="res://Scripts/options.gd" id="1_wrx7g"]
 [ext_resource type="FontFile" uid="uid://c0s3dqn0rih02" path="res://Font/VT323-Regular.ttf" id="2_aqgb0"]
+[ext_resource type="Texture2D" uid="uid://c4qhxgk77p43d" path="res://Images/menu_art.png" id="2_sujud"]
 [ext_resource type="Script" path="res://Scripts/HSlider.gd" id="3_cl0tl"]
+[ext_resource type="Theme" uid="uid://8d3oibwsitq4" path="res://Texture/slider_theme.tres" id="3_wb0fi"]
+[ext_resource type="Theme" uid="uid://b3hj6ra2wa0rm" path="res://Texture/button_theme.tres" id="4_f8qub"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nkeg2"]
 
 [node name="options" type="Control"]
 layout_mode = 3
@@ -13,14 +18,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wrx7g")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="TextureRect2" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.372549, 0.247059, 0.415686, 1)
+texture = ExtResource("2_sujud")
 
 [node name="MainContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(550, 0)
@@ -37,6 +42,10 @@ grow_horizontal = 2
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 0
 theme_override_constants/line_spacing = 20
 theme_override_fonts/font = ExtResource("2_aqgb0")
 theme_override_font_sizes/font_size = 68
@@ -58,6 +67,10 @@ theme_override_constants/separation = 15
 
 [node name="MasterLabel" type="Label" parent="MainContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("2_aqgb0")
 theme_override_font_sizes/font_size = 33
 text = "Volume Geral
@@ -66,6 +79,8 @@ horizontal_alignment = 1
 
 [node name="MasterHSlider" type="HSlider" parent="MainContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_wb0fi")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_nkeg2")
 min_value = -80.0
 max_value = 1.0
 step = 0.0
@@ -74,6 +89,10 @@ script = ExtResource("3_cl0tl")
 
 [node name="MusicLabel" type="Label" parent="MainContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("2_aqgb0")
 theme_override_font_sizes/font_size = 33
 text = "Música"
@@ -81,6 +100,7 @@ horizontal_alignment = 1
 
 [node name="MusicHSlider" type="HSlider" parent="MainContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_wb0fi")
 min_value = -80.0
 max_value = 1.0
 step = 0.0
@@ -90,6 +110,10 @@ channel = "Music"
 
 [node name="SoundsLabel" type="Label" parent="MainContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("2_aqgb0")
 theme_override_font_sizes/font_size = 33
 text = "Efeitos Sonoros"
@@ -97,6 +121,7 @@ horizontal_alignment = 1
 
 [node name="SoundsHSlider" type="HSlider" parent="MainContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_wb0fi")
 min_value = -80.0
 max_value = 1.0
 step = 0.0
@@ -108,6 +133,7 @@ channel = "Sounds"
 custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("4_f8qub")
 theme_override_fonts/font = ExtResource("2_aqgb0")
 theme_override_font_sizes/font_size = 33
 text = "Voltar"

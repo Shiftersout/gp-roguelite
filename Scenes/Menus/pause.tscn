@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bi3xa8l7kyqwy"]
+[gd_scene load_steps=5 format=3 uid="uid://bi3xa8l7kyqwy"]
 
 [ext_resource type="Script" path="res://Scripts/pause.gd" id="1_5bwwk"]
 [ext_resource type="FontFile" uid="uid://c0s3dqn0rih02" path="res://Font/VT323-Regular.ttf" id="2_kyqvk"]
+[ext_resource type="Theme" uid="uid://b3hj6ra2wa0rm" path="res://Texture/button_theme.tres" id="3_yoepq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fjmiu"]
 font = ExtResource("2_kyqvk")
@@ -62,6 +63,7 @@ theme_override_constants/separation = 40
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 size_flags_horizontal = 0
+theme = ExtResource("3_yoepq")
 theme_override_fonts/font = ExtResource("2_kyqvk")
 theme_override_font_sizes/font_size = 28
 text = "Voltar"
@@ -70,6 +72,7 @@ text = "Voltar"
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 size_flags_horizontal = 0
+theme = ExtResource("3_yoepq")
 theme_override_fonts/font = ExtResource("2_kyqvk")
 theme_override_font_sizes/font_size = 28
 text = "Retornar ao menu"
