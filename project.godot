@@ -14,7 +14,7 @@ config/name="Gp-roguelite"
 run/main_scene="res://Scenes/Menus/menu.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 boot_splash/bg_color=Color(0.0235294, 0.156863, 0.192157, 1)
-config/icon="res://icon.svg"
+config/icon="res://icon_TLP.svg"
 
 [autoload]
 
