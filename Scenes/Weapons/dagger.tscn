@@ -1,5 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://djt775wvor1ym"]
+[gd_scene load_steps=24 format=3 uid="uid://djt775wvor1ym"]
 
+[ext_resource type="Script" path="res://Scripts/weapon.gd" id="1_aqvbt"]
+[ext_resource type="Texture2D" uid="uid://u7n42l8ejvy5" path="res://Sprites/itens/dagger_item.png" id="2_2adpo"]
 [ext_resource type="PackedScene" uid="uid://bjh51cg126ool" path="res://Scenes/Player/default_particles.tscn" id="3_k4jlm"]
 [ext_resource type="Texture2D" uid="uid://8v1b2pknf2yn" path="res://Sprites/weapons/dagger_attack.png" id="3_oj0av"]
 [ext_resource type="PackedScene" uid="uid://clfyydw860c1r" path="res://Scenes/Player/player_hitbox.tscn" id="4_6gcaj"]
@@ -420,6 +422,8 @@ _data = {
 
 [node name="Dagger" type="Node2D"]
 position = Vector2(14, 0)
+script = ExtResource("1_aqvbt")
+weapon_image = ExtResource("2_2adpo")
 
 [node name="WeaponNode" type="Node2D" parent="."]
 material = SubResource("ShaderMaterial_mcpan")

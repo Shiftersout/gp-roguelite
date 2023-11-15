@@ -1,11 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://bt0wbs7fi3ffm"]
+[gd_scene load_steps=20 format=3 uid="uid://bt0wbs7fi3ffm"]
 
 [ext_resource type="Script" path="res://Scripts/player/player.gd" id="1_hy678"]
 [ext_resource type="Texture2D" uid="uid://cxp1l5qvxnygf" path="res://Sprites/player/player_idle.png" id="2_0q8xq"]
 [ext_resource type="Texture2D" uid="uid://dbcx3qqrg143v" path="res://Sprites/player/player_walking.png" id="3_018mt"]
 [ext_resource type="AudioStream" uid="uid://gpd380vn44k7" path="res://Audio/hurt.ogg" id="4_d3py6"]
-[ext_resource type="PackedScene" uid="uid://b3iqbkdgbttva" path="res://Scenes/Weapons/hammer.tscn" id="5_sis28"]
-[ext_resource type="PackedScene" uid="uid://djt775wvor1ym" path="res://Scenes/Weapons/dagger.tscn" id="6_eubf4"]
+[ext_resource type="PackedScene" uid="uid://c0mr8ealumylf" path="res://Scenes/Weapons/sword.tscn" id="5_y32ju"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k2gem"]
 atlas = ExtResource("2_0q8xq")
@@ -194,11 +193,7 @@ debug_color = Color(1, 0, 0.0823529, 0.419608)
 
 [node name="Hand" type="Node2D" parent="."]
 
-[node name="Hammer" parent="Hand" instance=ExtResource("5_sis28")]
-
-[node name="Dagger" parent="Hand" instance=ExtResource("6_eubf4")]
-process_mode = 4
-visible = false
+[node name="Sword" parent="Hand" instance=ExtResource("5_y32ju")]
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(30, 0)

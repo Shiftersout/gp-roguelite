@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bgnokk8ibq1hs"]
+[gd_scene load_steps=11 format=3 uid="uid://bgnokk8ibq1hs"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_ct2py"]
 [ext_resource type="PackedScene" uid="uid://bt0wbs7fi3ffm" path="res://Scenes/Player/player.tscn" id="1_tjw47"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://3oh63toaklkg" path="res://Scenes/NPCs/rat.tscn" id="6_50knb"]
 [ext_resource type="PackedScene" uid="uid://bi3xa8l7kyqwy" path="res://Scenes/Menus/pause.tscn" id="7_h656j"]
 [ext_resource type="PackedScene" uid="uid://gk3sfohuqidv" path="res://Scenes/Menus/game_over.tscn" id="8_m3qaq"]
+[ext_resource type="PackedScene" uid="uid://bafkq0tvfol8a" path="res://Scenes/Menus/ui.tscn" id="10_wsxnk"]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_ct2py")
@@ -31,6 +32,10 @@ position = Vector2(-127, -3)
 [node name="PauseLayer" type="CanvasLayer" parent="."]
 
 [node name="Pause" parent="PauseLayer" instance=ExtResource("7_h656j")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("10_wsxnk")]
 
 [node name="GameOverLayer" type="CanvasLayer" parent="."]
 

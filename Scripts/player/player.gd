@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
 signal game_over
+signal hp_updated(hp)
+signal coins_updated(c_value)
+signal weapon_changed(weapon_image)
 
 @export_group("status")
 @export var move_speed : float = 128
@@ -79,12 +82,17 @@ func attack():
 func take_damage(damage):
 	health_points -= damage
 	animation.play("take_damage")
+	hp_updated.emit(health_points)
 	
 	if health_points <= 0:
 		game_over.emit()
 		await game_over
 		visible = false
-		process_mode = Node.PROCESS_MODE_DISABLED
+		await hp_updated
+		call_deferred("disable")
+		
+func disable():
+	process_mode = Node.PROCESS_MODE_DISABLED
 	
 func _input(event):
 	if event.is_action_pressed("change_weapon"):
@@ -137,6 +145,7 @@ func change_weapon():
 	weapon.visible = true
 	weapon_animation = weapon.get_node("AnimationPlayer")
 	weapon_particles = weapon.get_node("WeaponNode/GPUParticles2D")
+	weapon_changed.emit(weapon.weapon_image)
 	return true
 
 ## Take damage if hit by enemy 

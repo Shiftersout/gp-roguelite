@@ -1,7 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://c0mr8ealumylf"]
+[gd_scene load_steps=24 format=3 uid="uid://c0mr8ealumylf"]
 
+[ext_resource type="Script" path="res://Scripts/weapon.gd" id="1_ah6dp"]
 [ext_resource type="PackedScene" uid="uid://bjh51cg126ool" path="res://Scenes/Player/default_particles.tscn" id="2_3rsrc"]
 [ext_resource type="Texture2D" uid="uid://e2qafe3r15lo" path="res://Sprites/weapons/sword_attack.png" id="2_l7l47"]
+[ext_resource type="Texture2D" uid="uid://caj000muk0eha" path="res://Sprites/itens/sword_item.png" id="2_s5hxd"]
 [ext_resource type="PackedScene" uid="uid://clfyydw860c1r" path="res://Scenes/Player/player_hitbox.tscn" id="3_7uq0x"]
 [ext_resource type="Script" path="res://Scripts/player/player_hitbox.gd" id="4_276jc"]
 [ext_resource type="AudioStream" uid="uid://djryp15qmy087" path="res://Audio/sword.ogg" id="4_rvkxb"]
@@ -420,6 +422,8 @@ _data = {
 
 [node name="Sword" type="Node2D"]
 position = Vector2(14, 0)
+script = ExtResource("1_ah6dp")
+weapon_image = ExtResource("2_s5hxd")
 
 [node name="WeaponNode" type="Node2D" parent="."]
 material = SubResource("ShaderMaterial_mcpan")

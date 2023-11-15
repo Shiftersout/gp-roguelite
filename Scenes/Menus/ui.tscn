@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=3 uid="uid://bafkq0tvfol8a"]
+
+[ext_resource type="Script" path="res://Scripts/ui.gd" id="1_4sb1q"]
+[ext_resource type="Texture2D" uid="uid://bxxlvgfqbs6pd" path="res://Sprites/ui/hearth_complete.png" id="2_0w436"]
+[ext_resource type="Texture2D" uid="uid://bpsaaipna723l" path="res://Sprites/ui/inventory_v1.png" id="2_a24yu"]
+[ext_resource type="Texture2D" uid="uid://n2ixcxsn2ony" path="res://Sprites/itens/coin.png" id="2_v7gph"]
+[ext_resource type="Texture2D" uid="uid://caj000muk0eha" path="res://Sprites/itens/sword_item.png" id="3_jn7eu"]
+[ext_resource type="FontFile" uid="uid://c0s3dqn0rih02" path="res://Font/VT323-Regular.ttf" id="3_n3boj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7qo14"]
+font = ExtResource("3_n3boj")
+font_size = 64
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4sb1q")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 53.0
+offset_top = 58.0
+offset_right = 217.0
+offset_bottom = 110.0
+size_flags_horizontal = 0
+
+[node name="Life1" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_0w436")
+expand_mode = 3
+
+[node name="Life2" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_0w436")
+expand_mode = 3
+
+[node name="Life3" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_0w436")
+expand_mode = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 135.0
+offset_right = 268.0
+offset_bottom = 218.0
+theme_override_constants/separation = 20
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("2_v7gph")
+stretch_mode = 5
+
+[node name="LabelCoins" type="Label" parent="HBoxContainer2"]
+layout_mode = 2
+text = "x 0
+"
+label_settings = SubResource("LabelSettings_7qo14")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1100.0
+offset_top = 587.0
+offset_right = 1339.0
+offset_bottom = 734.0
+scale = Vector2(0.734432, 0.734432)
+texture = ExtResource("2_a24yu")
+stretch_mode = 4
+
+[node name="TextureRectWeapon" type="TextureRect" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.5
+offset_top = -35.5
+offset_right = 42.5
+offset_bottom = 47.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_jn7eu")
+stretch_mode = 5

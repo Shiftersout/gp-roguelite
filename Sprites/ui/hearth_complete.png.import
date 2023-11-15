@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bakqe3knr2y06"
-path="res://.godot/imported/hearth_dano_completo.png-d92ba60e47facbcd4ee95f354a4284b5.ctex"
+uid="uid://bxxlvgfqbs6pd"
+path="res://.godot/imported/hearth_complete.png-de27effaf63b6c300a89d69d0280a34d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/ui/hearth_dano_completo.png"
-dest_files=["res://.godot/imported/hearth_dano_completo.png-d92ba60e47facbcd4ee95f354a4284b5.ctex"]
+source_file="res://Sprites/ui/hearth_complete.png"
+dest_files=["res://.godot/imported/hearth_complete.png-de27effaf63b6c300a89d69d0280a34d.ctex"]
 
 [params]
 
