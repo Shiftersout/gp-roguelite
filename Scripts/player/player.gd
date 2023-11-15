@@ -94,6 +94,15 @@ func take_damage(damage):
 func disable():
 	process_mode = Node.PROCESS_MODE_DISABLED
 	
+func obtain_coin():
+	coins +=1
+	coins_updated.emit(coins)
+	
+func obtain_heart():
+	health_points += 2
+	health_points = min(6, health_points) 
+	hp_updated.emit(health_points)
+
 func _input(event):
 	if event.is_action_pressed("change_weapon"):
 		current_weapon+=1

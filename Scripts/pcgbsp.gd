@@ -360,9 +360,6 @@ func create_enemies():
 		if enemy_rooms[i]:
 			normal_rooms.append(enemy_rooms[i])
 		
-	print_debug(enemy_rooms)
-	print_debug(hard_rooms)
-	print_debug(normal_rooms)
 	add_enemies(4, hard_rooms)
 	add_enemies(3, normal_rooms)
 	

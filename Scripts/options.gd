@@ -13,5 +13,5 @@ func _on_back_pressed():
 	get_tree().change_scene_to_file("res://Scenes/Menus/menu.tscn")
 
 
-func _on_sounds_h_slider_drag_ended(value_changed):
+func _on_sounds_h_slider_drag_ended(_value_changed):
 	audio.play()

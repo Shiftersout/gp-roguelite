@@ -46,7 +46,7 @@ func _on_player_hp_updated(hp):
 		life2.texture = heart_full
 	
 func _on_player_coins_updated(c_value):
-	label.text = "x " + c_value.to_string()
+	label.text = "x " + str(c_value)
 
 func _on_player_weapon_changed(weapon_image):
 	weapon.texture = weapon_image

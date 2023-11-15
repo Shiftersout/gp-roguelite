@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c45o3s6qm7qg8"]
+[gd_scene load_steps=12 format=3 uid="uid://c45o3s6qm7qg8"]
 
 [ext_resource type="PackedScene" uid="uid://bw67e8mrqn5vd" path="res://Scenes/tile_map_pcg.tscn" id="2_57i02"]
 [ext_resource type="PackedScene" uid="uid://bt0wbs7fi3ffm" path="res://Scenes/Player/player.tscn" id="3_bvah5"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://br1ucxlr16na8" path="res://Scenes/Itens/hammer_item.tscn" id="7_gu68g"]
 [ext_resource type="PackedScene" uid="uid://c5d5c3v43y3yr" path="res://Scenes/Itens/dagger_item.tscn" id="8_tmr2u"]
 [ext_resource type="PackedScene" uid="uid://3oh63toaklkg" path="res://Scenes/NPCs/rat.tscn" id="9_6goqb"]
+[ext_resource type="PackedScene" uid="uid://ds2walp0cyvx7" path="res://Scenes/Itens/coin.tscn" id="10_r6605"]
+[ext_resource type="PackedScene" uid="uid://bfub16qauqjri" path="res://Scenes/Itens/heart.tscn" id="11_oop0g"]
 
 [node name="debugenemy" type="Node2D"]
 
@@ -52,3 +54,9 @@ position = Vector2(471, 258)
 
 [node name="Rat" parent="." instance=ExtResource("9_6goqb")]
 position = Vector2(504, 305)
+
+[node name="Coin" parent="." instance=ExtResource("10_r6605")]
+position = Vector2(404, 271)
+
+[node name="Coin2" parent="." instance=ExtResource("11_oop0g")]
+position = Vector2(575, 216)

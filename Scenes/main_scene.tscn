@@ -29,14 +29,12 @@ npc = ExtResource("6_50knb")
 [node name="Player" parent="TileMapPCG" instance=ExtResource("1_tjw47")]
 position = Vector2(-127, -3)
 
-[node name="PauseLayer" type="CanvasLayer" parent="."]
+[node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="Pause" parent="PauseLayer" instance=ExtResource("7_h656j")]
+[node name="UI" parent="UILayer" instance=ExtResource("10_wsxnk")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="MenuLayer" type="CanvasLayer" parent="."]
 
-[node name="UI" parent="CanvasLayer" instance=ExtResource("10_wsxnk")]
+[node name="Pause" parent="MenuLayer" instance=ExtResource("7_h656j")]
 
-[node name="GameOverLayer" type="CanvasLayer" parent="."]
-
-[node name="GameOver" parent="GameOverLayer" instance=ExtResource("8_m3qaq")]
+[node name="GameOver" parent="MenuLayer" instance=ExtResource("8_m3qaq")]

@@ -430,11 +430,12 @@ _data = {
 "warning": SubResource("Animation_tdvir")
 }
 
-[node name="FemaleGobin" type="CharacterBody2D" node_paths=PackedStringArray("animation_hit") groups=["enemy"]]
+[node name="FemaleGobin" type="CharacterBody2D" node_paths=PackedStringArray("animation_hit", "audio") groups=["enemy"]]
 collision_layer = 2
 script = ExtResource("1_np4ug")
 health_points = 5
 animation_hit = NodePath("AnimationPlayerHit")
+audio = NodePath("AudioStreamPlayer2D")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0.5, 0)
