@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=3 uid="uid://gk3sfohuqidv"]
+
+[ext_resource type="Shader" path="res://Shaders/outline.gdshader" id="1_46ivt"]
+[ext_resource type="Script" path="res://Scripts/game_over.gd" id="1_ep1xl"]
+[ext_resource type="Texture2D" uid="uid://cya0wluqcmxxo" path="res://Images/game_over_text.png" id="1_ip4lu"]
+[ext_resource type="Theme" uid="uid://b3hj6ra2wa0rm" path="res://Texture/button_theme.tres" id="2_obne3"]
+[ext_resource type="FontFile" uid="uid://c0s3dqn0rih02" path="res://Font/VT323-Regular.ttf" id="3_s2k17"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dv7pm"]
+shader = ExtResource("1_46ivt")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[node name="GameOver" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ep1xl")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.282353)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -294.0
+offset_top = -202.0
+offset_right = 294.0
+offset_bottom = 202.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 120
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+material = SubResource("ShaderMaterial_dv7pm")
+layout_mode = 2
+texture = ExtResource("1_ip4lu")
+expand_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="RetryButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_obne3")
+theme_override_fonts/font = ExtResource("3_s2k17")
+theme_override_font_sizes/font_size = 28
+text = "Recomeçar"
+
+[node name="MenuButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_obne3")
+theme_override_fonts/font = ExtResource("3_s2k17")
+theme_override_font_sizes/font_size = 28
+text = "Retornar ao menu"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]

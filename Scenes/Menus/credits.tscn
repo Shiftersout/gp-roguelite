@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c76i7spjdat2s"]
+[gd_scene load_steps=6 format=3 uid="uid://c76i7spjdat2s"]
 
 [ext_resource type="Script" path="res://Scripts/credits.gd" id="1_q2ehg"]
 [ext_resource type="Texture2D" uid="uid://c4qhxgk77p43d" path="res://Images/menu_art.png" id="2_ei0s5"]
 [ext_resource type="FontFile" uid="uid://c0s3dqn0rih02" path="res://Font/VT323-Regular.ttf" id="2_iunmu"]
 [ext_resource type="Theme" uid="uid://b3hj6ra2wa0rm" path="res://Texture/button_theme.tres" id="3_6cppg"]
+[ext_resource type="Texture2D" uid="uid://cotjx57orw7cp" path="res://Sprites/ui/Logo_tamandua_bailarino_cor_texto.png" id="5_cl203"]
 
 [node name="credits" type="Control"]
 layout_mode = 3
@@ -22,6 +23,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ei0s5")
+
+[node name="Musics" type="Label" parent="."]
+layout_mode = 2
+offset_left = 15.0
+offset_top = 450.0
+offset_right = 873.0
+offset_bottom = 746.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_iunmu")
+theme_override_font_sizes/font_size = 28
+text = "Músicas:
+\"Three Red Hearts,
+Prepare to Dev Edition\"
+\"Penultimate\" e \"Pixel War 1\"
+por Abstraction
+(http://www.abstractionmusic.com)
+Licensed under Creative Commons: By Attribution 4.0 International.
+http://creativecommons.org/licenses/by/4.0/
+"
 
 [node name="MainContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(550, 0)
@@ -122,5 +144,13 @@ theme_override_fonts/font = ExtResource("2_iunmu")
 theme_override_font_sizes/font_size = 33
 text = "Voltar
 "
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+offset_left = 1061.0
+offset_top = 513.0
+offset_right = 1259.0
+offset_bottom = 711.0
+texture = ExtResource("5_cl203")
+expand_mode = 1
 
 [connection signal="pressed" from="MainContainer/Back" to="." method="_on_back_pressed"]

@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bgnokk8ibq1hs"]
+[gd_scene load_steps=10 format=3 uid="uid://bgnokk8ibq1hs"]
 
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_ct2py"]
 [ext_resource type="PackedScene" uid="uid://bt0wbs7fi3ffm" path="res://Scenes/Player/player.tscn" id="1_tjw47"]
 [ext_resource type="PackedScene" uid="uid://bw67e8mrqn5vd" path="res://Scenes/tile_map_pcg.tscn" id="2_vawyb"]
 [ext_resource type="PackedScene" uid="uid://18v1vrksmqug" path="res://Scenes/Enemies/first floor/m_goblin.tscn" id="3_yd28l"]
@@ -7,8 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://mi0sbway6q46" path="res://Scenes/Enemies/first floor/hobgoblin.tscn" id="5_s856g"]
 [ext_resource type="PackedScene" uid="uid://3oh63toaklkg" path="res://Scenes/NPCs/rat.tscn" id="6_50knb"]
 [ext_resource type="PackedScene" uid="uid://bi3xa8l7kyqwy" path="res://Scenes/Menus/pause.tscn" id="7_h656j"]
+[ext_resource type="PackedScene" uid="uid://gk3sfohuqidv" path="res://Scenes/Menus/game_over.tscn" id="8_m3qaq"]
 
 [node name="MainScene" type="Node2D"]
+script = ExtResource("1_ct2py")
 
 [node name="TileMapPCG" parent="." instance=ExtResource("2_vawyb")]
 cell_quadrant_size = 32
@@ -25,6 +28,10 @@ npc = ExtResource("6_50knb")
 [node name="Player" parent="TileMapPCG" instance=ExtResource("1_tjw47")]
 position = Vector2(-127, -3)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="PauseLayer" type="CanvasLayer" parent="."]
 
-[node name="Pause" parent="CanvasLayer" instance=ExtResource("7_h656j")]
+[node name="Pause" parent="PauseLayer" instance=ExtResource("7_h656j")]
+
+[node name="GameOverLayer" type="CanvasLayer" parent="."]
+
+[node name="GameOver" parent="GameOverLayer" instance=ExtResource("8_m3qaq")]

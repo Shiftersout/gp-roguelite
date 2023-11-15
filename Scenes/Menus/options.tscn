@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dct2gmywgcv5k"]
+[gd_scene load_steps=9 format=3 uid="uid://dct2gmywgcv5k"]
 
 [ext_resource type="Script" path="res://Scripts/options.gd" id="1_wrx7g"]
+[ext_resource type="AudioStream" uid="uid://kkjy43q7c0ee" path="res://Audio/coin.ogg" id="2_0pw8x"]
 [ext_resource type="FontFile" uid="uid://c0s3dqn0rih02" path="res://Font/VT323-Regular.ttf" id="2_aqgb0"]
 [ext_resource type="Texture2D" uid="uid://c4qhxgk77p43d" path="res://Images/menu_art.png" id="2_sujud"]
 [ext_resource type="Script" path="res://Scripts/HSlider.gd" id="3_cl0tl"]
@@ -17,6 +18,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wrx7g")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0pw8x")
+bus = &"Sounds"
 
 [node name="TextureRect2" type="TextureRect" parent="."]
 layout_mode = 1
@@ -81,10 +86,9 @@ horizontal_alignment = 1
 layout_mode = 2
 theme = ExtResource("3_wb0fi")
 theme_override_styles/grabber_area = SubResource("StyleBoxTexture_nkeg2")
-min_value = -80.0
-max_value = 1.0
+min_value = -30.0
+max_value = 0.0
 step = 0.0
-value = -41.0
 script = ExtResource("3_cl0tl")
 
 [node name="MusicLabel" type="Label" parent="MainContainer/HBoxContainer/VBoxContainer"]
@@ -101,10 +105,8 @@ horizontal_alignment = 1
 [node name="MusicHSlider" type="HSlider" parent="MainContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_wb0fi")
-min_value = -80.0
-max_value = 1.0
-step = 0.0
-value = -41.0
+min_value = -30.0
+max_value = 0.0
 script = ExtResource("3_cl0tl")
 channel = "Music"
 
@@ -122,10 +124,9 @@ horizontal_alignment = 1
 [node name="SoundsHSlider" type="HSlider" parent="MainContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_wb0fi")
-min_value = -80.0
-max_value = 1.0
+min_value = -30.0
+max_value = 0.0
 step = 0.0
-value = -41.0
 script = ExtResource("3_cl0tl")
 channel = "Sounds"
 
@@ -138,4 +139,5 @@ theme_override_fonts/font = ExtResource("2_aqgb0")
 theme_override_font_sizes/font_size = 33
 text = "Voltar"
 
+[connection signal="drag_ended" from="MainContainer/HBoxContainer/VBoxContainer/SoundsHSlider" to="." method="_on_sounds_h_slider_drag_ended"]
 [connection signal="pressed" from="MainContainer/HBoxContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

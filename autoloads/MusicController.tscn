@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/MusicController.gd" id="1_vb7wf"]
 
-[node name="MusicController" type="Node"]
+[node name="MusicController" type="Node" groups=["music"]]
 script = ExtResource("1_vb7wf")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]

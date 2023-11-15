@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal game_over
+
 @export_group("status")
 @export var move_speed : float = 128
 @export var health_points : int = 6
@@ -79,8 +81,10 @@ func take_damage(damage):
 	animation.play("take_damage")
 	
 	if health_points <= 0:
-		print_debug("GAME OVER!")
-	
+		game_over.emit()
+		await game_over
+		visible = false
+		process_mode = Node.PROCESS_MODE_DISABLED
 	
 func _input(event):
 	if event.is_action_pressed("change_weapon"):

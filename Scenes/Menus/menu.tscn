@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cmrggdtmeef5w"]
+[gd_scene load_steps=7 format=3 uid="uid://cmrggdtmeef5w"]
 
 [ext_resource type="Script" path="res://Scripts/menu.gd" id="1_84dkl"]
 [ext_resource type="Texture2D" uid="uid://c4qhxgk77p43d" path="res://Images/menu_art.png" id="2_klruq"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://mcqd6b4bfnp3" path="res://Images/logomarca fatec.png" id="3_hlsru"]
 [ext_resource type="Texture2D" uid="uid://cmliq5srgl8xn" path="res://Images/texto.png" id="3_r7xdp"]
 [ext_resource type="Theme" uid="uid://b3hj6ra2wa0rm" path="res://Texture/button_theme.tres" id="4_wm55m"]
-[ext_resource type="Texture2D" uid="uid://cotjx57orw7cp" path="res://Sprites/ui/Logo_tamandua_bailarino_cor_texto.png" id="7_pqmt6"]
 
 [node name="menu" type="Control"]
 layout_mode = 3
@@ -117,15 +116,6 @@ offset_top = 616.0
 offset_right = 1217.0
 offset_bottom = 703.0
 texture = ExtResource("3_hlsru")
-
-[node name="TextureRect3" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 926.0
-offset_top = 589.0
-offset_right = 1057.0
-offset_bottom = 720.0
-texture = ExtResource("7_pqmt6")
-expand_mode = 1
 
 [connection signal="pressed" from="MainContainer/HBoxContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MainContainer/HBoxContainer/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
