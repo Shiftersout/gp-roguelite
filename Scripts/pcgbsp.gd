@@ -53,7 +53,7 @@ var item_scenes = []
 ## NOTE: change.
 func _ready():
 	item_scenes.append(load("res://Scenes/Itens/dagger_item.tscn"))
-	item_scenes.append(load("res://Scenes/Itens/sword_item.tscn"))
+	##item_scenes.append(load("res://Scenes/Itens/sword_item.tscn"))
 	item_scenes.append(load("res://Scenes/Itens/hammer_item.tscn"))
 	
 	global_position = Vector2.ZERO

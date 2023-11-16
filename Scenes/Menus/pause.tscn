@@ -1,12 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://bi3xa8l7kyqwy"]
+[gd_scene load_steps=6 format=3 uid="uid://bi3xa8l7kyqwy"]
 
 [ext_resource type="Script" path="res://Scripts/pause.gd" id="1_5bwwk"]
 [ext_resource type="FontFile" uid="uid://c0s3dqn0rih02" path="res://Font/VT323-Regular.ttf" id="2_kyqvk"]
+[ext_resource type="Texture2D" uid="uid://dophk04ybj8yd" path="res://Sprites/ui/option_menu.png" id="2_te5rj"]
 [ext_resource type="Theme" uid="uid://b3hj6ra2wa0rm" path="res://Texture/button_theme.tres" id="3_yoepq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fjmiu"]
 font = ExtResource("2_kyqvk")
 font_size = 60
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Pause" type="Control"]
 process_mode = 3
@@ -28,6 +31,21 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.282353)
 
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -265.5
+offset_top = -320.5
+offset_right = 265.5
+offset_bottom = 320.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_te5rj")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -35,10 +53,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -294.0
-offset_top = -202.0
-offset_right = 294.0
-offset_bottom = 202.0
+offset_left = -402.5
+offset_top = -277.0
+offset_right = 402.5
+offset_bottom = 277.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -46,6 +64,8 @@ grow_vertical = 2
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/outline_size = 0
 text = "Pause"
 label_settings = SubResource("LabelSettings_fjmiu")
 horizontal_alignment = 1
@@ -60,21 +80,21 @@ layout_mode = 2
 theme_override_constants/separation = 40
 
 [node name="BackButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(300, 50)
+custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("3_yoepq")
 theme_override_fonts/font = ExtResource("2_kyqvk")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 38
 text = "Voltar"
 
 [node name="MenuButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(300, 50)
+custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("3_yoepq")
 theme_override_fonts/font = ExtResource("2_kyqvk")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 38
 text = "Retornar ao menu"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
