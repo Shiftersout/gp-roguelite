@@ -76,7 +76,7 @@ theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("2_iunmu")
 theme_override_font_sizes/font_size = 33
-text = "Filipe Gonçalves de Oliveira - 0040962113031
+text = "Filipe Gonçalves de Oliveira - 0040962113031 - Programador
 "
 horizontal_alignment = 1
 
@@ -87,7 +87,7 @@ theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("2_iunmu")
 theme_override_font_sizes/font_size = 33
-text = "Gustavo Ferrari Baratela - 0040962113028"
+text = "Gustavo Ferrari Baratela - 0040962113028 - Programador"
 horizontal_alignment = 1
 
 [node name="Matheus" type="Label" parent="MainContainer"]
@@ -97,7 +97,7 @@ theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("2_iunmu")
 theme_override_font_sizes/font_size = 33
-text = "Matheus Felipe Macedo Bezerra - 0040962113021
+text = "Matheus Felipe Macedo Bezerra - 0040962113021 - Artista
 "
 horizontal_alignment = 1
 
@@ -109,7 +109,7 @@ theme_override_constants/outline_size = 10
 theme_override_constants/line_spacing = 50
 theme_override_fonts/font = ExtResource("2_iunmu")
 theme_override_font_sizes/font_size = 33
-text = "Raphael Alves Toledo - 0040962113040"
+text = "Raphael Alves Toledo - 0040962113040 - Artista"
 horizontal_alignment = 1
 
 [node name="SubTitle" type="Label" parent="MainContainer"]

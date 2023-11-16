@@ -92,7 +92,7 @@ size_flags_horizontal = 0
 theme = ExtResource("4_wm55m")
 theme_override_fonts/font = ExtResource("3_0x0ln")
 theme_override_font_sizes/font_size = 33
-text = "Configurções"
+text = "Configurações"
 
 [node name="Quit" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["button"]]
 custom_minimum_size = Vector2(200, 50)
