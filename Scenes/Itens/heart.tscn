@@ -43,13 +43,13 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_m0j0l"]
 radius = 7.0
 
-[node name="Coin" type="Node2D"]
+[node name="Heart" type="Node2D"]
 script = ExtResource("1_36j4j")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ggmuf")
 autoplay = "default"
-frame_progress = 0.755115
+frame_progress = 0.578767
 
 [node name="Area2D" type="Area2D" parent="."]
 

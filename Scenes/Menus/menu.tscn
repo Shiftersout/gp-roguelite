@@ -31,10 +31,11 @@ layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_left = 50.0
-offset_right = 600.0
+offset_top = 85.0
+offset_right = 608.0
+offset_bottom = -85.0
 grow_vertical = 2
-theme_override_constants/separation = 40
-alignment = 1
+theme_override_constants/separation = 10
 
 [node name="TextureRect" type="TextureRect" parent="MainContainer"]
 layout_mode = 2
@@ -63,6 +64,17 @@ theme = ExtResource("4_wm55m")
 theme_override_fonts/font = ExtResource("3_0x0ln")
 theme_override_font_sizes/font_size = 33
 text = "Jogar"
+
+[node name="Tutorial" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["button"]]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.6
+theme = ExtResource("4_wm55m")
+theme_override_fonts/font = ExtResource("3_0x0ln")
+theme_override_font_sizes/font_size = 33
+text = "Tutorial
+"
 
 [node name="Credits" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer" groups=["button"]]
 custom_minimum_size = Vector2(200, 50)
@@ -118,6 +130,7 @@ offset_bottom = 703.0
 texture = ExtResource("3_hlsru")
 
 [connection signal="pressed" from="MainContainer/HBoxContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MainContainer/HBoxContainer/VBoxContainer/Tutorial" to="." method="_on_tutorial_pressed"]
 [connection signal="pressed" from="MainContainer/HBoxContainer/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="MainContainer/HBoxContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MainContainer/HBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
