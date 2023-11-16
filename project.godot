@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Gp-roguelite"
+config/name="The Lost Preservatorium"
 run/main_scene="res://Scenes/Menus/menu.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 boot_splash/bg_color=Color(0.0235294, 0.156863, 0.192157, 1)
