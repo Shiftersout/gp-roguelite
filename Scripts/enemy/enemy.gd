@@ -24,12 +24,10 @@ func take_damage(damage:int):
 	if health_points <= 0:
 		if randi_range(1, 5) == 5:
 			var parent = get_parent()
-			print_debug("coração")
 			call_deferred("add_heart", parent, position)
 			
 			
 		if randi_range(1, 3) == 3:
-			print_debug("moeda")
 			var parent = get_parent()
 			call_deferred("add_coin", parent, position)
 			

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bgnokk8ibq1hs"]
+[gd_scene load_steps=13 format=3 uid="uid://bgnokk8ibq1hs"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_ct2py"]
 [ext_resource type="PackedScene" uid="uid://bt0wbs7fi3ffm" path="res://Scenes/Player/player.tscn" id="1_tjw47"]
@@ -7,9 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://bxdolqcnms1e4" path="res://Scenes/Enemies/first floor/f_goblin.tscn" id="4_gson5"]
 [ext_resource type="PackedScene" uid="uid://mi0sbway6q46" path="res://Scenes/Enemies/first floor/hobgoblin.tscn" id="5_s856g"]
 [ext_resource type="PackedScene" uid="uid://3oh63toaklkg" path="res://Scenes/NPCs/rat.tscn" id="6_50knb"]
+[ext_resource type="PackedScene" uid="uid://bi65dxsnxaisk" path="res://Scenes/Itens/stairs.tscn" id="7_cety6"]
 [ext_resource type="PackedScene" uid="uid://bi3xa8l7kyqwy" path="res://Scenes/Menus/pause.tscn" id="7_h656j"]
 [ext_resource type="PackedScene" uid="uid://gk3sfohuqidv" path="res://Scenes/Menus/game_over.tscn" id="8_m3qaq"]
 [ext_resource type="PackedScene" uid="uid://bafkq0tvfol8a" path="res://Scenes/Menus/ui.tscn" id="10_wsxnk"]
+[ext_resource type="PackedScene" uid="uid://cfg0hg2p4eewd" path="res://Scenes/Menus/ending.tscn" id="11_8te5h"]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_ct2py")
@@ -25,6 +27,7 @@ enemy1 = ExtResource("3_yd28l")
 enemy2 = ExtResource("4_gson5")
 hard_enemy = ExtResource("5_s856g")
 npc = ExtResource("6_50knb")
+stair = ExtResource("7_cety6")
 
 [node name="Player" parent="TileMapPCG" instance=ExtResource("1_tjw47")]
 position = Vector2(-127, -3)
@@ -38,3 +41,5 @@ position = Vector2(-127, -3)
 [node name="Pause" parent="MenuLayer" instance=ExtResource("7_h656j")]
 
 [node name="GameOver" parent="MenuLayer" instance=ExtResource("8_m3qaq")]
+
+[node name="Ending" parent="MenuLayer" instance=ExtResource("11_8te5h")]

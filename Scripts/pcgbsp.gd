@@ -23,6 +23,7 @@ extends TileMap
 @export var enemy2 : Resource
 @export var hard_enemy : Resource
 @export var npc : Resource
+@export var stair : Resource
 
 var player : CharacterBody2D
 
@@ -85,6 +86,7 @@ func generate():
 		spawn_player()
 		spawn_npc()
 		spawn_item()
+		spawn_stair()
 	
 	
 ## Fills the entire map with roof tiles.
@@ -412,3 +414,8 @@ func spawn_item():
 	var item_instance = item_scenes[randi_range(0, item_scenes.size()-1)].instantiate()
 	item_instance.global_position = Vector2(rooms[item_room].center.x*16, rooms[item_room].center.y*16)
 	add_child(item_instance)
+
+func spawn_stair():
+	var stair_instance = stair.instantiate()
+	stair_instance.global_position = Vector2(rooms[boss_room].center.x*16, rooms[boss_room].center.y*16)
+	add_child(stair_instance)

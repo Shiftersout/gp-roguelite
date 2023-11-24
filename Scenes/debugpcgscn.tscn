@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d6uq7t25yisc"]
+[gd_scene load_steps=8 format=3 uid="uid://d6uq7t25yisc"]
 
 [ext_resource type="PackedScene" uid="uid://bw67e8mrqn5vd" path="res://Scenes/tile_map_pcg.tscn" id="1_ok4ya"]
 [ext_resource type="PackedScene" uid="uid://18v1vrksmqug" path="res://Scenes/Enemies/first floor/m_goblin.tscn" id="2_5t7k7"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bxdolqcnms1e4" path="res://Scenes/Enemies/first floor/f_goblin.tscn" id="3_5uypg"]
 [ext_resource type="PackedScene" uid="uid://mi0sbway6q46" path="res://Scenes/Enemies/first floor/hobgoblin.tscn" id="4_vsll5"]
 [ext_resource type="PackedScene" uid="uid://3oh63toaklkg" path="res://Scenes/NPCs/rat.tscn" id="5_cq7ju"]
+[ext_resource type="PackedScene" uid="uid://bi65dxsnxaisk" path="res://Scenes/Itens/stairs.tscn" id="6_aci2w"]
 
 [node name="debugscn" type="Node2D"]
 
@@ -22,6 +23,7 @@ enemy1 = ExtResource("2_5t7k7")
 enemy2 = ExtResource("3_5uypg")
 hard_enemy = ExtResource("4_vsll5")
 npc = ExtResource("5_cq7ju")
+stair = ExtResource("6_aci2w")
 
 [node name="Player" parent="." instance=ExtResource("2_t7dax")]
 position = Vector2(-210, 294)
